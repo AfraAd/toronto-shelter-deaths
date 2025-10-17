@@ -1,0 +1,85 @@
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 100;
+  margin-top: 50px;
+  font-size: 30px;
+
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.container-fluid {
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.browser text {
+  text-anchor: end;
+}
+
+.area {
+  opacity: 0.7;
+  clip-path: url(#clip);
+}
+.area:hover {
+  opacity: 1;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+#heatmap {
+  height: 100%;
+  width: 100%;
+}
+
+.col-md-8 offset-2{
+    margin-top: 5vh;
+    border: thin solid grey;
+    border-radius: 5px;
+    background: rgba(221, 221, 221, 0.45);
+
+}
+
+
+/* Section heights */
+.header-row {
+    height: 15vh;
+}
+
+.graph-row {
+    height: 80vh;
+}
+
+.tooltip {
+  background-color: white;
+  border:solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  pointer-events: none;
+
+}
+

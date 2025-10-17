@@ -1,0 +1,2027 @@
+[
+    {
+        "_id": 1,
+        "Year": 2007,
+        "Month": "Jan",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 2,
+        "Year": 2007,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 3,
+        "Year": 2007,
+        "Month": "Mar",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 4,
+        "Year": 2007,
+        "Month": "Apr",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 5,
+        "Year": 2007,
+        "Month": "May",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 6,
+        "Year": 2007,
+        "Month": "Jun",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 7,
+        "Year": 2007,
+        "Month": "Jul",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 8,
+        "Year": 2007,
+        "Month": "Aug",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 9,
+        "Year": 2007,
+        "Month": "Sep",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 10,
+        "Year": 2007,
+        "Month": "Oct",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 11,
+        "Year": 2007,
+        "Month": "Nov",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 12,
+        "Year": 2007,
+        "Month": "Dec",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 13,
+        "Year": 2008,
+        "Month": "Jan",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 14,
+        "Year": 2008,
+        "Month": "Feb",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 15,
+        "Year": 2008,
+        "Month": "Mar",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 16,
+        "Year": 2008,
+        "Month": "Apr",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 17,
+        "Year": 2008,
+        "Month": "May",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 18,
+        "Year": 2008,
+        "Month": "Jun",
+        "Total decedents": 6,
+        "Male": 4,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 19,
+        "Year": 2008,
+        "Month": "Jul",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 20,
+        "Year": 2008,
+        "Month": "Aug",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 21,
+        "Year": 2008,
+        "Month": "Sep",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 22,
+        "Year": 2008,
+        "Month": "Oct",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 23,
+        "Year": 2008,
+        "Month": "Nov",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 24,
+        "Year": 2008,
+        "Month": "Dec",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 25,
+        "Year": 2009,
+        "Month": "Jan",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 26,
+        "Year": 2009,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 27,
+        "Year": 2009,
+        "Month": "Mar",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 28,
+        "Year": 2009,
+        "Month": "Apr",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 29,
+        "Year": 2009,
+        "Month": "May",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 30,
+        "Year": 2009,
+        "Month": "Jun",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 31,
+        "Year": 2009,
+        "Month": "Jul",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 32,
+        "Year": 2009,
+        "Month": "Aug",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 33,
+        "Year": 2009,
+        "Month": "Sep",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 34,
+        "Year": 2009,
+        "Month": "Oct",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 35,
+        "Year": 2009,
+        "Month": "Nov",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 36,
+        "Year": 2009,
+        "Month": "Dec",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 37,
+        "Year": 2010,
+        "Month": "Jan",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 38,
+        "Year": 2010,
+        "Month": "Feb",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 39,
+        "Year": 2010,
+        "Month": "Mar",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 40,
+        "Year": 2010,
+        "Month": "Apr",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 41,
+        "Year": 2010,
+        "Month": "May",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 42,
+        "Year": 2010,
+        "Month": "Jun",
+        "Total decedents": 3,
+        "Male": 1,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 43,
+        "Year": 2010,
+        "Month": "Jul",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 44,
+        "Year": 2010,
+        "Month": "Aug",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 45,
+        "Year": 2010,
+        "Month": "Sep",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 46,
+        "Year": 2010,
+        "Month": "Oct",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 47,
+        "Year": 2010,
+        "Month": "Nov",
+        "Total decedents": 4,
+        "Male": 1,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 48,
+        "Year": 2010,
+        "Month": "Dec",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 49,
+        "Year": 2011,
+        "Month": "Jan",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 50,
+        "Year": 2011,
+        "Month": "Feb",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 51,
+        "Year": 2011,
+        "Month": "Mar",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 52,
+        "Year": 2011,
+        "Month": "Apr",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 53,
+        "Year": 2011,
+        "Month": "May",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 54,
+        "Year": 2011,
+        "Month": "Jun",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 55,
+        "Year": 2011,
+        "Month": "Jul",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 56,
+        "Year": 2011,
+        "Month": "Aug",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 57,
+        "Year": 2011,
+        "Month": "Sep",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 58,
+        "Year": 2011,
+        "Month": "Oct",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 59,
+        "Year": 2011,
+        "Month": "Nov",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 60,
+        "Year": 2011,
+        "Month": "Dec",
+        "Total decedents": 5,
+        "Male": 3,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 61,
+        "Year": 2012,
+        "Month": "Jan",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 62,
+        "Year": 2012,
+        "Month": "Feb",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 63,
+        "Year": 2012,
+        "Month": "Mar",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 64,
+        "Year": 2012,
+        "Month": "Apr",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 65,
+        "Year": 2012,
+        "Month": "May",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 66,
+        "Year": 2012,
+        "Month": "Jun",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 67,
+        "Year": 2012,
+        "Month": "Jul",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 68,
+        "Year": 2012,
+        "Month": "Aug",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 69,
+        "Year": 2012,
+        "Month": "Sep",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 70,
+        "Year": 2012,
+        "Month": "Oct",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 71,
+        "Year": 2012,
+        "Month": "Nov",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 72,
+        "Year": 2012,
+        "Month": "Dec",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 73,
+        "Year": 2013,
+        "Month": "Jan",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 74,
+        "Year": 2013,
+        "Month": "Feb",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 75,
+        "Year": 2013,
+        "Month": "Mar",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 76,
+        "Year": 2013,
+        "Month": "Apr",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 77,
+        "Year": 2013,
+        "Month": "May",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 78,
+        "Year": 2013,
+        "Month": "Jun",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 79,
+        "Year": 2013,
+        "Month": "Jul",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 80,
+        "Year": 2013,
+        "Month": "Aug",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 81,
+        "Year": 2013,
+        "Month": "Sep",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 82,
+        "Year": 2013,
+        "Month": "Oct",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 83,
+        "Year": 2013,
+        "Month": "Nov",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 84,
+        "Year": 2013,
+        "Month": "Dec",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 85,
+        "Year": 2014,
+        "Month": "Jan",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 86,
+        "Year": 2014,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 87,
+        "Year": 2014,
+        "Month": "Mar",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 88,
+        "Year": 2014,
+        "Month": "Apr",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 89,
+        "Year": 2014,
+        "Month": "May",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 90,
+        "Year": 2014,
+        "Month": "Jun",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 91,
+        "Year": 2014,
+        "Month": "Jul",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 92,
+        "Year": 2014,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 93,
+        "Year": 2014,
+        "Month": "Sep",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 94,
+        "Year": 2014,
+        "Month": "Oct",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 95,
+        "Year": 2014,
+        "Month": "Nov",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 96,
+        "Year": 2014,
+        "Month": "Dec",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 97,
+        "Year": 2015,
+        "Month": "Jan",
+        "Total decedents": 7,
+        "Male": 6,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 98,
+        "Year": 2015,
+        "Month": "Feb",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 99,
+        "Year": 2015,
+        "Month": "Mar",
+        "Total decedents": 5,
+        "Male": 5,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 100,
+        "Year": 2015,
+        "Month": "Apr",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 101,
+        "Year": 2015,
+        "Month": "May",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 102,
+        "Year": 2015,
+        "Month": "Jun",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 103,
+        "Year": 2015,
+        "Month": "Jul",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 104,
+        "Year": 2015,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 105,
+        "Year": 2015,
+        "Month": "Sep",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 106,
+        "Year": 2015,
+        "Month": "Oct",
+        "Total decedents": 5,
+        "Male": 5,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 107,
+        "Year": 2015,
+        "Month": "Nov",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 108,
+        "Year": 2015,
+        "Month": "Dec",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 109,
+        "Year": 2016,
+        "Month": "Jan",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 110,
+        "Year": 2016,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 111,
+        "Year": 2016,
+        "Month": "Mar",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 112,
+        "Year": 2016,
+        "Month": "Apr",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 113,
+        "Year": 2016,
+        "Month": "May",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 114,
+        "Year": 2016,
+        "Month": "Jun",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 115,
+        "Year": 2016,
+        "Month": "Jul",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 116,
+        "Year": 2016,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 117,
+        "Year": 2016,
+        "Month": "Sep",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 118,
+        "Year": 2016,
+        "Month": "Oct",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 119,
+        "Year": 2016,
+        "Month": "Nov",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 120,
+        "Year": 2016,
+        "Month": "Dec",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 121,
+        "Year": 2017,
+        "Month": "Jan",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 122,
+        "Year": 2017,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 123,
+        "Year": 2017,
+        "Month": "Mar",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 124,
+        "Year": 2017,
+        "Month": "Apr",
+        "Total decedents": 4,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 125,
+        "Year": 2017,
+        "Month": "May",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 126,
+        "Year": 2017,
+        "Month": "Jun",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 127,
+        "Year": 2017,
+        "Month": "Jul",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 128,
+        "Year": 2017,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 129,
+        "Year": 2017,
+        "Month": "Sep",
+        "Total decedents": 4,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 130,
+        "Year": 2017,
+        "Month": "Oct",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 131,
+        "Year": 2017,
+        "Month": "Nov",
+        "Total decedents": 4,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 132,
+        "Year": 2017,
+        "Month": "Dec",
+        "Total decedents": 2,
+        "Male": 0,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 133,
+        "Year": 2018,
+        "Month": "Jan",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 134,
+        "Year": 2018,
+        "Month": "Feb",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 135,
+        "Year": 2018,
+        "Month": "Mar",
+        "Total decedents": 1,
+        "Male": 0,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 136,
+        "Year": 2018,
+        "Month": "Apr",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 137,
+        "Year": 2018,
+        "Month": "May",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 138,
+        "Year": 2018,
+        "Month": "Jun",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 139,
+        "Year": 2018,
+        "Month": "Jul",
+        "Total decedents": 2,
+        "Male": 1,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 140,
+        "Year": 2018,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 141,
+        "Year": 2018,
+        "Month": "Sep",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 142,
+        "Year": 2018,
+        "Month": "Oct",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 143,
+        "Year": 2018,
+        "Month": "Nov",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 144,
+        "Year": 2018,
+        "Month": "Dec",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 145,
+        "Year": 2019,
+        "Month": "Jan",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 146,
+        "Year": 2019,
+        "Month": "Feb",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 147,
+        "Year": 2019,
+        "Month": "Mar",
+        "Total decedents": 4,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 148,
+        "Year": 2019,
+        "Month": "Apr",
+        "Total decedents": 9,
+        "Male": 6,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 149,
+        "Year": 2019,
+        "Month": "May",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 150,
+        "Year": 2019,
+        "Month": "Jun",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 151,
+        "Year": 2019,
+        "Month": "Jul",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 152,
+        "Year": 2019,
+        "Month": "Aug",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 153,
+        "Year": 2019,
+        "Month": "Sep",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 154,
+        "Year": 2019,
+        "Month": "Oct",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 155,
+        "Year": 2019,
+        "Month": "Nov",
+        "Total decedents": 6,
+        "Male": 4,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 156,
+        "Year": 2019,
+        "Month": "Dec",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "n/a"
+    },
+    {
+        "_id": 157,
+        "Year": 2020,
+        "Month": "Jan",
+        "Total decedents": 7,
+        "Male": 4,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 158,
+        "Year": 2020,
+        "Month": "Feb",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 159,
+        "Year": 2020,
+        "Month": "Mar",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 160,
+        "Year": 2020,
+        "Month": "Apr",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 161,
+        "Year": 2020,
+        "Month": "May",
+        "Total decedents": 8,
+        "Male": 6,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 162,
+        "Year": 2020,
+        "Month": "Jun",
+        "Total decedents": 5,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 163,
+        "Year": 2020,
+        "Month": "Jul",
+        "Total decedents": 13,
+        "Male": 8,
+        "Female": 5,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 164,
+        "Year": 2020,
+        "Month": "Aug",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 165,
+        "Year": 2020,
+        "Month": "Sep",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 166,
+        "Year": 2020,
+        "Month": "Oct",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 167,
+        "Year": 2020,
+        "Month": "Nov",
+        "Total decedents": 9,
+        "Male": 7,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 168,
+        "Year": 2020,
+        "Month": "Dec",
+        "Total decedents": 11,
+        "Male": 9,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 169,
+        "Year": 2021,
+        "Month": "Jan",
+        "Total decedents": 12,
+        "Male": 6,
+        "Female": 5,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 170,
+        "Year": 2021,
+        "Month": "Feb",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 171,
+        "Year": 2021,
+        "Month": "Mar",
+        "Total decedents": 11,
+        "Male": 7,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 172,
+        "Year": 2021,
+        "Month": "Apr",
+        "Total decedents": 7,
+        "Male": 5,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 173,
+        "Year": 2021,
+        "Month": "May",
+        "Total decedents": 13,
+        "Male": 8,
+        "Female": 5,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 174,
+        "Year": 2021,
+        "Month": "Jun",
+        "Total decedents": 7,
+        "Male": 4,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 175,
+        "Year": 2021,
+        "Month": "Jul",
+        "Total decedents": 11,
+        "Male": 7,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 176,
+        "Year": 2021,
+        "Month": "Aug",
+        "Total decedents": 17,
+        "Male": 15,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 177,
+        "Year": 2021,
+        "Month": "Sep",
+        "Total decedents": 12,
+        "Male": 9,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 178,
+        "Year": 2021,
+        "Month": "Oct",
+        "Total decedents": 19,
+        "Male": 16,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 179,
+        "Year": 2021,
+        "Month": "Nov",
+        "Total decedents": 11,
+        "Male": 8,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 180,
+        "Year": 2021,
+        "Month": "Dec",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 181,
+        "Year": 2022,
+        "Month": "Jan",
+        "Total decedents": 14,
+        "Male": 10,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 182,
+        "Year": 2022,
+        "Month": "Feb",
+        "Total decedents": 9,
+        "Male": 7,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 183,
+        "Year": 2022,
+        "Month": "Mar",
+        "Total decedents": 3,
+        "Male": 3,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 184,
+        "Year": 2022,
+        "Month": "Apr",
+        "Total decedents": 11,
+        "Male": 9,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 185,
+        "Year": 2022,
+        "Month": "May",
+        "Total decedents": 12,
+        "Male": 11,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 186,
+        "Year": 2022,
+        "Month": "Jun",
+        "Total decedents": 10,
+        "Male": 5,
+        "Female": 5,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 187,
+        "Year": 2022,
+        "Month": "Jul",
+        "Total decedents": 8,
+        "Male": 5,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 188,
+        "Year": 2022,
+        "Month": "Aug",
+        "Total decedents": 5,
+        "Male": 2,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 189,
+        "Year": 2022,
+        "Month": "Sep",
+        "Total decedents": 9,
+        "Male": 6,
+        "Female": 3,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 190,
+        "Year": 2022,
+        "Month": "Oct",
+        "Total decedents": 8,
+        "Male": 7,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 191,
+        "Year": 2022,
+        "Month": "Nov",
+        "Total decedents": 14,
+        "Male": 10,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 192,
+        "Year": 2022,
+        "Month": "Dec",
+        "Total decedents": 7,
+        "Male": 6,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 193,
+        "Year": 2023,
+        "Month": "Jan",
+        "Total decedents": 12,
+        "Male": 10,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 194,
+        "Year": 2023,
+        "Month": "Feb",
+        "Total decedents": 10,
+        "Male": 9,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 195,
+        "Year": 2023,
+        "Month": "Mar",
+        "Total decedents": 10,
+        "Male": 10,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 196,
+        "Year": 2023,
+        "Month": "Apr",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 197,
+        "Year": 2023,
+        "Month": "May",
+        "Total decedents": 7,
+        "Male": 5,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 198,
+        "Year": 2023,
+        "Month": "Jun",
+        "Total decedents": 8,
+        "Male": 8,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 199,
+        "Year": 2023,
+        "Month": "Jul",
+        "Total decedents": 8,
+        "Male": 7,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 200,
+        "Year": 2023,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 201,
+        "Year": 2023,
+        "Month": "Sep",
+        "Total decedents": 7,
+        "Male": 7,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 202,
+        "Year": 2023,
+        "Month": "Oct",
+        "Total decedents": 4,
+        "Male": 3,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 203,
+        "Year": 2023,
+        "Month": "Nov",
+        "Total decedents": 10,
+        "Male": 5,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 204,
+        "Year": 2023,
+        "Month": "Dec",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 205,
+        "Year": 2024,
+        "Month": "Jan",
+        "Total decedents": 13,
+        "Male": 7,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "2"
+    },
+    {
+        "_id": 206,
+        "Year": 2024,
+        "Month": "Feb",
+        "Total decedents": 9,
+        "Male": 8,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 207,
+        "Year": 2024,
+        "Month": "Mar",
+        "Total decedents": 7,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 208,
+        "Year": 2024,
+        "Month": "Apr",
+        "Total decedents": 8,
+        "Male": 6,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 209,
+        "Year": 2024,
+        "Month": "May",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 210,
+        "Year": 2024,
+        "Month": "Jun",
+        "Total decedents": 0,
+        "Male": 0,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 211,
+        "Year": 2024,
+        "Month": "Jul",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 212,
+        "Year": 2024,
+        "Month": "Aug",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 213,
+        "Year": 2024,
+        "Month": "Sep",
+        "Total decedents": 4,
+        "Male": 4,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 214,
+        "Year": 2024,
+        "Month": "Oct",
+        "Total decedents": 2,
+        "Male": 0,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 215,
+        "Year": 2024,
+        "Month": "Nov",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 216,
+        "Year": 2024,
+        "Month": "Dec",
+        "Total decedents": 3,
+        "Male": 2,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 217,
+        "Year": 2025,
+        "Month": "Jan",
+        "Total decedents": 5,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 218,
+        "Year": 2025,
+        "Month": "Feb",
+        "Total decedents": 2,
+        "Male": 2,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 219,
+        "Year": 2025,
+        "Month": "Mar",
+        "Total decedents": 6,
+        "Male": 2,
+        "Female": 4,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 220,
+        "Year": 2025,
+        "Month": "Apr",
+        "Total decedents": 6,
+        "Male": 5,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 221,
+        "Year": 2025,
+        "Month": "May",
+        "Total decedents": 6,
+        "Male": 6,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 222,
+        "Year": 2025,
+        "Month": "Jun",
+        "Total decedents": 6,
+        "Male": 4,
+        "Female": 1,
+        "Transgender/Non-binary/Two-Spirit": "1"
+    },
+    {
+        "_id": 223,
+        "Year": 2025,
+        "Month": "Jul",
+        "Total decedents": 1,
+        "Male": 1,
+        "Female": 0,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 224,
+        "Year": 2025,
+        "Month": "Aug",
+        "Total decedents": 4,
+        "Male": 2,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    },
+    {
+        "_id": 225,
+        "Year": 2025,
+        "Month": "Sep",
+        "Total decedents": 6,
+        "Male": 4,
+        "Female": 2,
+        "Transgender/Non-binary/Two-Spirit": "0"
+    }
+]
