@@ -1,0 +1,262 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "notebook_title",
+   "metadata": {},
+   "source": [
+    "# 🐍 Shelter Resident Deaths: Data Cleaning and Exploratory Analysis (2007-2025)\n",
+    "\n",
+    "This notebook loads the `Deaths of Shelter Residents.json` dataset, performs necessary data cleaning (handling 'n/a' values and creating a time-series index), generates summary statistics, and visualizes the trends over time."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "section_1_load",
+   "metadata": {},
+   "source": [
+    "---",
+    "## 1. Setup and Initial Data Inspection",
+    "\n",
+    "### Code Explanation\n",
+    "We import the required libraries (`pandas`, `numpy`, `matplotlib`, `seaborn`), set up the plotting styles, and attempt to load the data from the `Deaths of Shelter Residents.json` file. The code then prints the head of the DataFrame and its data types to inspect the initial structure and identify necessary cleaning steps (like the `object` dtype for `Transgender/Non-binary/Two-Spirit`)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "code_cell_1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import seaborn as sns\n",
+    "\n",
+    "# --- Configuration and Data Loading ---\n",
+    "\n",
+    "# Set up plotting style for visualizations\n",
+    "sns.set_style(\"whitegrid\")\n",
+    "plt.rcParams['figure.figsize'] = (12, 7)\n",
+    "plt.rcParams['font.family'] = 'sans-serif'\n",
+    "\n",
+    "# 1. Data Loading\n",
+    "# Assuming the file \"Deaths of Shelter Residents.json\" is accessible in the environment\n",
+    "try:\n",
+    "    df = pd.read_json('Deaths of Shelter Residents.json')\n",
+    "except FileNotFoundError:\n",
+    "    print(\"Error: 'Deaths of Shelter Residents.json' not found. Please ensure the file is in the correct directory.\")\n",
+    "    exit()\n",
+    "\n",
+    "print(\"--- 1. Initial Data Inspection ---\")\n",
+    "print(\"\\nInitial DataFrame Head:\")\n",
+    "print(df.head())\n",
+    "print(\"\\nInitial Data Types:\")\n",
+    "df.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "section_2_clean",
+   "metadata": {},
+   "source": [
+    "---",
+    "## 2. Data Cleaning and Preprocessing",
+    "\n",
+    "### Code Explanation\n",
+    "This section cleans the data for analysis:\n",
+    "\n",
+    "1.  **Rename Column:** The lengthy `Transgender/Non-binary/Two-Spirit` column is renamed to `TGNBT` for brevity.\n",
+    "2.  **Handle Missing Data and Type Conversion:** Non-numeric string values (`'n/a'`) in the `TGNBT` column are replaced with `0`, and the column is converted to an `integer` data type.\n",
+    "3.  **Create Time-Series Index:** The `Year` and `Month` columns are combined to form a datetime index (`Date`), which is essential for time-series plotting.\n",
+    "4.  **Drop Columns:** Unnecessary columns (`_id`, `Year`, `Month`) are removed."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "code_cell_2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Rename the long column for easier use\n",
+    "df = df.rename(columns={'Transgender/Non-binary/Two-Spirit': 'TGNBT'})\n",
+    "\n",
+    "# Handle 'n/a' in the 'TGNBT' column by replacing it with 0 \n",
+    "# Then convert the column to integer type for numerical analysis\n",
+    "df['TGNBT'] = df['TGNBT'].replace('n/a', '0').astype(int)\n",
+    "\n",
+    "# Create a combined datetime index for time-series analysis\n",
+    "df['Date'] = pd.to_datetime(df['Year'].astype(str) + '-' + df['Month'], format='%Y-%b')\n",
+    "df = df.set_index('Date').sort_index()\n",
+    "\n",
+    "# Drop unnecessary columns\n",
+    "df = df.drop(columns=['_id', 'Year', 'Month'])\n",
+    "\n",
+    "print(\"\\n\\n--- 2. Cleaned Data Verification ---\")\n",
+    "print(\"\\nCleaned DataFrame Head (showing time-series index and TGNBT as int):\")\n",
+    "print(df.head())\n",
+    "print(\"\\nFinal Data Types:\")\n",
+    "df.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "section_3_stats",
+   "metadata": {},
+   "source": [
+    "---",
+    "## 3. Exploratory Data Analysis (EDA): Summary Statistics",
+    "\n",
+    "### Code Explanation\n",
+    "We use the `.describe()` method on the core count columns (`Total decedents`, `Male`, `Female`, `TGNBT`) to quickly understand the central tendency, dispersion, and range of the data. The output immediately highlights the significant difference in average counts between male and female decedents."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "code_cell_3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Summary Statistics\n",
+    "print(\"\\n\\n--- 3. Summary Statistics (Monthly Decedents 2007-2025) ---\")\n",
+    "summary_stats = df[['Total decedents', 'Male', 'Female', 'TGNBT']].describe().T\n",
+    "print(summary_stats[['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max']].round(2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "section_4_time_series",
+   "metadata": {},
+   "source": [
+    "---",
+    "## 4. EDA: Time-Series Visualizations",
+    "\n",
+    "### Code Explanation\n",
+    "These plots visualize the data's evolution over time, using the `Date` index created earlier.\n",
+    "\n",
+    "**Plot 1 (Total Decedents):** Shows the overall monthly trend. A vertical dashed line is added at January 1, 2020, to highlight the approximate start of a significant increase in total deaths.\n",
+    "\n",
+    "**Plot 2 (Decedents by Gender):** Separates the counts by gender category to show which group is primarily driving the overall trend. The conditional plotting of the `TGNBT` category ensures the code is robust, though this data only becomes non-zero after 2020."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "code_cell_4_1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Plot 1: Total Decedents Over Time\n",
+    "plt.figure(figsize=(14, 6))\n",
+    "plt.plot(df.index, df['Total decedents'], label='Total Decedents', color='red', linewidth=2.5, alpha=0.9)\n",
+    "plt.title('Monthly Total Deaths of Shelter Residents Over Time (2007-2025)', fontsize=16)\n",
+    "plt.xlabel('Year', fontsize=14)\n",
+    "plt.ylabel('Total Monthly Decedents', fontsize=14)\n",
+    "# Highlight the significant jump around 2020\n",
+    "plt.axvline(pd.to_datetime('2020-01-01'), color='gray', linestyle='--', label='Approximate Start of Increased Trend (2020)')\n",
+    "plt.legend()\n",
+    "plt.grid(True, linestyle='--', alpha=0.6)\n",
+    "plt.tight_layout()\n",
+    "plt.show()\n",
+    "\n",
+    "# Plot 2: Decedents by Gender Over Time\n",
+    "plt.figure(figsize=(14, 6))\n",
+    "plt.plot(df.index, df['Male'], label='Male Decedents', color='blue', alpha=0.8)\n",
+    "plt.plot(df.index, df['Female'], label='Female Decedents', color='orange', alpha=0.8)\n",
+    "# Only plot TGNBT if there are non-zero values recorded (which starts around 2020)\n",
+    "if df['TGNBT'].sum() > 0:\n",
+    "    plt.plot(df.index, df['TGNBT'], label='TGNBT Decedents', color='green', linewidth=2, alpha=1.0)\n",
+    "    \n",
+    "plt.title('Monthly Deaths by Gender Over Time (2007-2025)', fontsize=16)\n",
+    "plt.xlabel('Year', fontsize=14)\n",
+    "plt.ylabel('Decedents by Gender', fontsize=14)\n",
+    "plt.legend()\n",
+    "plt.grid(True, linestyle='--', alpha=0.6)\n",
+    "plt.tight_layout()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "section_5_distributions",
+   "metadata": {},
+   "source": [
+    "---",
+    "## 5. EDA: Distribution Analysis (Histograms and Bar Plots)",
+    "\n",
+    "### Code Explanation\n",
+    "These subplots illustrate the frequency distribution of monthly death counts for each category over the entire period.\n",
+    "\n",
+    "* **Histograms (A and B):** Used for Total and Male decedents to show the general shape of the distribution, which is heavily skewed right (low counts are most common).\n",
+    "* **Count Plots (C and D):** Used for Female and TGNBT, as their counts are often $0$, making a bar plot (showing the frequency of each discrete count) more informative."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "code_cell_5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Distribution analysis (using subplots)\n",
+    "fig, axes = plt.subplots(2, 2, figsize=(14, 10))\n",
+    "fig.suptitle('Distribution of Monthly Decedents (2007-2025)', fontsize=18)\n",
+    "\n",
+    "# A. Total Decedents (Histogram)\n",
+    "# np.arange(x+2) - 0.5 ensures that bars are centered correctly over integer counts\n",
+    "sns.histplot(df['Total decedents'], bins=np.arange(df['Total decedents'].max() + 2) - 0.5,\n",
+    "             kde=True, ax=axes[0, 0], color='teal', edgecolor='black')\n",
+    "axes[0, 0].set_title('A. Total Decedents (Monthly)')\n",
+    "axes[0, 0].set_xlabel('Monthly Count')\n",
+    "axes[0, 0].set_xticks(np.arange(0, df['Total decedents'].max() + 1, 2))\n",
+    "\n",
+    "# B. Male Decedents (Histogram)\n",
+    "sns.histplot(df['Male'], bins=np.arange(df['Male'].max() + 2) - 0.5,\n",
+    "             kde=True, ax=axes[0, 1], color='darkblue', edgecolor='black')\n",
+    "axes[0, 1].set_title('B. Male Decedents (Monthly)')\n",
+    "axes[0, 1].set_xlabel('Monthly Count')\n",
+    "axes[0, 1].set_xticks(np.arange(0, df['Male'].max() + 1, 2))\n",
+    "\n",
+    "# C. Female Decedents (Bar Plot)\n",
+    "sns.countplot(x=df['Female'], ax=axes[1, 0], color='orange', edgecolor='black')\n",
+    "axes[1, 0].set_title('C. Female Decedents (Frequency Bar Plot)')\n",
+    "axes[1, 0].set_xlabel('Monthly Count')\n",
+    "axes[1, 0].set_ylabel('Number of Months')\n",
+    "\n",
+    "# D. TGNBT Decedents (Bar Plot)\n",
+    "sns.countplot(x=df['TGNBT'], ax=axes[1, 1], color='purple', edgecolor='black')\n",
+    "axes[1, 1].set_title('D. TGNBT Decedents (Frequency Bar Plot)')\n",
+    "axes[1, 1].set_xlabel('Monthly Count')\n",
+    "axes[1, 1].set_ylabel('Number of Months')\n",
+    "axes[1, 1].set_xticks(np.arange(df['TGNBT'].max() + 1))\n",
+    "\n",
+    "plt.tight_layout(rect=[0, 0, 1, 0.96])\n",
+    "plt.show()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
