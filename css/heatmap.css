@@ -1,0 +1,295 @@
+/* =====================================================
+   HEATMAP SPECIFIC STYLES
+   ===================================================== */
+
+#heatmap {
+    width: 100%;
+    min-height: 700px;
+    position: relative;
+}
+
+#heatmap svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* =====================================================
+   HEATMAP CELLS
+   ===================================================== */
+
+#heatmap .value {
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: all 0.2s ease;
+}
+
+#heatmap .value:hover {
+    stroke: #134fbdff;
+    stroke-width: 3px;
+    filter: brightness(0.9);
+}
+
+/* =====================================================
+   HEATMAP AXES
+   ===================================================== */
+
+#heatmap .x-axis text {
+    font-size: 13px;
+    font-weight: 500;
+    fill: #333;
+}
+
+#heatmap .y-axis text {
+    font-size: 12px;
+    font-weight: 500;
+    fill: #333;
+}
+
+#heatmap .x-axis path,
+#heatmap .x-axis line {
+    stroke: #999;
+    stroke-width: 1.5px;
+}
+
+#heatmap .y-axis path,
+#heatmap .y-axis line {
+    stroke: #999;
+    stroke-width: 1.5px;
+}
+
+/* =====================================================
+   HEATMAP TOOLTIP
+   ===================================================== */
+
+.heatmap-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10000;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.heatmap-tooltip strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 3px;
+}
+
+.heatmap-tooltip span {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   COLOR LEGEND
+   ===================================================== */
+
+#colorLegend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+#colorLegend svg {
+    display: block;
+}
+
+#colorLegend text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    fill: #555;
+    font-weight: 500;
+}
+
+#colorLegend .legend-title {
+    font-size: 13px;
+    font-weight: 600;
+    fill: #333;
+}
+
+#colorLegend rect {
+    shape-rendering: crispEdges;
+}
+
+/* =====================================================
+   HEATMAP ANIMATION EFFECTS
+   ===================================================== */
+
+@keyframes heatmapFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#heatmap .value.entering {
+    animation: heatmapFadeIn 0.3s ease-out;
+}
+
+/* =====================================================
+   HEATMAP RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 1400px) {
+    #heatmap {
+        min-height: 600px;
+    }
+    
+    #heatmap .x-axis text {
+        font-size: 11px;
+    }
+    
+    #heatmap .y-axis text {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+    #heatmap {
+        min-height: 500px;
+    }
+    
+    #colorLegend {
+        padding: 10px;
+    }
+    
+    #heatmap .tooltip {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #heatmap {
+        min-height: 400px;
+    }
+    
+    #heatmap .x-axis text {
+        font-size: 9px;
+    }
+    
+    #heatmap .y-axis text {
+        font-size: 9px;
+    }
+    
+    #heatmap .value {
+        stroke-width: 1px;
+    }
+    
+    #colorLegend {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* =====================================================
+   HEATMAP GRID PATTERN (OPTIONAL ENHANCEMENT)
+   ===================================================== */
+
+#heatmap .grid line {
+    stroke: #e0e0e0;
+    stroke-opacity: 0.3;
+    stroke-width: 1px;
+}
+
+#heatmap .grid path {
+    stroke-width: 0;
+}
+
+/* =====================================================
+   HEATMAP LOADING STATE
+   ===================================================== */
+
+#heatmap.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 700px;
+}
+
+#heatmap.loading::before {
+    content: 'Loading heatmap...';
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* =====================================================
+   HEATMAP EMPTY STATE
+   ===================================================== */
+
+#heatmap.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 700px;
+    color: #999;
+    font-size: 16px;
+}
+
+#heatmap.empty::before {
+    content: 'No data available for the selected filters';
+    font-weight: 500;
+}
+
+/* =====================================================
+   COLOR SCALE VARIATIONS (for different themes)
+   ===================================================== */
+
+.heatmap-red .value {
+    /* Red color scheme already default */
+}
+
+.heatmap-blue .value {
+    /* Alternative blue scheme if needed */
+}
+
+.heatmap-green .value {
+    /* Alternative green scheme if needed */
+}
+
+/* =====================================================
+   HEATMAP INTERACTION STATES
+   ===================================================== */
+
+#heatmap .value.selected {
+    stroke: #134fbdff;
+    stroke-width: 4px;
+    filter: brightness(0.85);
+}
+
+#heatmap .value.dimmed {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+/* =====================================================
+   HEATMAP PRINT STYLES
+   ===================================================== */
+
+@media print {
+    #heatmap {
+        page-break-inside: avoid;
+    }
+    
+    #heatmap .tooltip {
+        display: none;
+    }
+    
+    #colorLegend {
+        border: 1px solid #000;
+    }
+}

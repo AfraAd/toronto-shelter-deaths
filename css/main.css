@@ -1,0 +1,434 @@
+/* =====================================================
+   GLOBAL STYLES & LAYOUT
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* =====================================================
+   HEADER STYLES
+   ===================================================== */
+
+.header-row {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.header-row h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #134fbdff;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.header-row h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #666;
+    margin: 0;
+}
+
+/* =====================================================
+   TAB STYLES
+   ===================================================== */
+
+.tab-container {
+    margin: 30px 0;
+    border-bottom: 3px solid #134fbdff;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tab-button {
+    padding: 14px 35px;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    border: 2px solid #ddd;
+    border-bottom: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 10px 10px 0 0;
+    margin-right: 5px;
+    color: #555;
+    position: relative;
+}
+
+.tab-button:hover {
+    background: linear-gradient(to bottom, #e9ecef, #dee2e6);
+    color: #134fbdff;
+    transform: translateY(-2px);
+}
+
+.tab-button.active {
+    background: white;
+    border-color: #134fbdff;
+    border-bottom: 3px solid white;
+    color: #134fbdff;
+    margin-bottom: -3px;
+    box-shadow: 0 -2px 8px rgba(19, 79, 189, 0.1);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: white;
+}
+
+.tab-content {
+    display: none;
+    padding: 30px 0;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.tab-content h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tab-content p {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+/* =====================================================
+   GLOBAL FILTERS SECTION
+   ===================================================== */
+
+.global-filters {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-row {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.filter-section {
+    flex: 1;
+    min-width: 280px;
+}
+
+.filter-section h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #134fbdff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* =====================================================
+   CHECKBOX FILTER STYLES
+   ===================================================== */
+
+.filter-checkbox {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    font-size: 14px;
+}
+
+.filter-checkbox:hover {
+    border-color: #134fbdff;
+    background: #e8f0ff;
+    box-shadow: 0 2px 6px rgba(19, 79, 189, 0.15);
+    transform: translateY(-1px);
+}
+
+.filter-checkbox.checked {
+    border-color: #134fbdff;
+    background: #e8f0ff;
+    box-shadow: 0 0 0 3px rgba(19, 79, 189, 0.1);
+}
+
+.filter-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #134fbdff;
+}
+
+.filter-checkbox span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.filter-section.year-range-section {
+  margin-top: 25px;
+}
+
+
+/* =====================================================
+   YEAR RANGE FILTER STYLES
+   ===================================================== */
+
+.year-range-section {
+    flex: 2;
+    min-width: 450px;
+    max-width: 100%;
+}
+
+#brushChart {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#brushChart svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.year-range-display {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #134fbdff, #1a5fd1);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(19, 79, 189, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.btn-filter-control {
+    padding: 10px 24px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-filter-control:hover {
+    background: #5a6268;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-filter-control:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   BRUSH CHART STYLES
+   ===================================================== */
+
+.brush .selection {
+    fill: #134fbdff;
+    fill-opacity: 0.25;
+    stroke: #134fbdff;
+    stroke-width: 2px;
+}
+
+.brush .handle {
+    fill: #134fbdff;
+}
+
+.brush-area {
+    pointer-events: none;
+}
+
+/* =====================================================
+   VISUALIZATION CONTAINER
+   ===================================================== */
+
+.vis-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.vis-container > div {
+    width: 100%;
+    min-width: 0; /* Allow flex children to shrink */
+}
+
+/* =====================================================
+   D3 AXIS STYLES
+   ===================================================== */
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #666;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    fill: #555;
+}
+
+.x-axis-label,
+.y-axis-label {
+    font-family: 'Roboto', sans-serif;
+    fill: #333;
+}
+
+/* =====================================================
+   TOOLTIP BASE STYLES
+   ===================================================== */
+
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 1200px) {
+    .filter-row {
+        gap: 30px;
+    }
+    
+    .filter-section {
+        min-width: 100%;
+    }
+    
+    .year-range-section {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-row h1 {
+        font-size: 28px;
+    }
+    
+    .header-row h2 {
+        font-size: 16px;
+    }
+    
+    .tab-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .global-filters {
+        padding: 20px;
+    }
+    
+    .vis-container {
+        padding: 10px;
+        min-height: 400px;
+    }
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-2 { margin-top: 10px; }
+.mt-3 { margin-top: 15px; }
+.mt-4 { margin-top: 20px; }
+.mt-5 { margin-top: 30px; }
+
+.mb-2 { margin-bottom: 10px; }
+.mb-3 { margin-bottom: 15px; }
+.mb-4 { margin-bottom: 20px; }
+.mb-5 { margin-bottom: 30px; }
+
+/* =====================================================
+   LOADING ANIMATION
+   ===================================================== */
+
+.loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #134fbdff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

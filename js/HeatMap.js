@@ -1,18 +1,16 @@
 class HeatMap {
 
 	// constructor method to initialize HeatMap object
-	constructor(parentElement, data) {
+	constructor(parentElement, data, globalFilters) {
 		this.parentElement = parentElement;
-
+		this.data = data;
+		this.globalFilters = globalFilters;
+		this.displayData = [];
+		this.isFirstLoad = true;
+		
 		// Categories for x and y axis
 		this.cols = Array.from(new Set(data.map(d=> d.group)));
 		this.rows = Array.from(new Set(data.map(d=> d.variable)));
-		this.data = data
-		this.yearCutoff = 2025;
-		this.displayData = [];
-		this.yearStart = 2007;
-		this.yearEnd = 2025;
-		this.isFirstLoad = true;
 	}
 
 	/*
@@ -21,10 +19,13 @@ class HeatMap {
 	initVis(){
 		let vis = this;
 
-		vis.margin = {top: 60, right: 40, bottom: 60, left: 40};
+		vis.margin = {top: 60, right: 40, bottom: 60, left: 60};
 
-		vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-		vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+		// Get container width with fallback
+		const container = document.getElementById(vis.parentElement);
+		const containerWidth = container ? container.getBoundingClientRect().width : 1200;
+		vis.width = containerWidth - vis.margin.left - vis.margin.right;
+		vis.height = 600; // Fixed height for heatmap
 
 		// SVG drawing area
 		vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -63,10 +64,13 @@ class HeatMap {
 			.range(["#ffffff", "#7b1a28"]);
 		
 		// Add tooltip to heatmap
-		vis.tooltip = d3.select("#" + vis.parentElement)
+		vis.tooltip = d3.select("body")
 							.append("div")
+							.attr("class", "heatmap-tooltip")
 							.style("opacity", 0)
-							.attr("class", "tooltip");
+							.style("position", "absolute")
+							.style("pointer-events", "none")
+							.style("z-index", "10000");
 	
 		vis.wrangleData();
 	}
@@ -76,15 +80,29 @@ class HeatMap {
 	*/
 	wrangleData() {
 		let vis = this;
+		
+		// Filter by year range and apply gender filters
 		vis.displayData = vis.data.filter(
-			d => +d.variable >= vis.yearStart && +d.variable <= vis.yearEnd
-		);
+			d => +d.variable >= vis.globalFilters.yearRange[0] && 
+			     +d.variable <= vis.globalFilters.yearRange[1]
+		).map(d => {
+			// Calculate filtered value based on gender selections
+			let filteredValue = 0;
+			if (vis.globalFilters.genderFilters.male) filteredValue += d.Male || 0;
+			if (vis.globalFilters.genderFilters.female) filteredValue += d.Female || 0;
+			if (vis.globalFilters.genderFilters.trans) filteredValue += d.Trans || 0;
+			
+			return {
+				...d,
+				filteredValue: filteredValue
+			};
+		});
+		
 		vis.updateVis();
 	}
 
 	/*
 	 * The drawing function - should use the D3 update sequence (enter, update, exit)
-	* Function parameters only needed if different kinds of updates are needed
 	*/
 	updateVis(){
 		let vis = this;
@@ -95,7 +113,7 @@ class HeatMap {
 			.range([vis.height, 0])
 			.padding(0.01);
 
-		let maxValue = d3.max(vis.displayData, d => +d.value);
+		let maxValue = d3.max(vis.displayData, d => +d.filteredValue);
 		vis.colorScale.domain([0, maxValue || 1]);
 
 		let categories = vis.svg.selectAll(".value")
@@ -107,7 +125,7 @@ class HeatMap {
 			.attr("y", d => vis.y(d.variable))
 			.attr("width", vis.x.bandwidth())
 			.attr("height", vis.y.bandwidth())
-			.style("fill", d => vis.colorScale(+d.value))
+			.style("fill", d => vis.colorScale(+d.filteredValue))
 			.style("cursor", "pointer")
 			.style("opacity", 0);
 
@@ -135,7 +153,7 @@ class HeatMap {
 			.attr("y", d => vis.y(d.variable))
 			.attr("width", vis.x.bandwidth())
 			.attr("height", vis.y.bandwidth())
-			.style("fill", d => vis.colorScale(+d.value));
+			.style("fill", d => vis.colorScale(+d.filteredValue));
 
 		categories.exit().remove();
 
@@ -168,14 +186,6 @@ class HeatMap {
 			})
 			.on("mouseleave", () => {
 				vis.tooltip.transition().duration(300).style("opacity", 0);
-			})
-			.on("click", (event, d) => {
-				// Check if shift key is pressed for area chart, otherwise show gender chart
-				if (event.shiftKey) {
-					vis.showYearAreaChart(d.variable);
-				} else {
-					vis.showGenderChart(d.group);
-				}
 			});
 
 		vis.xAxis = d3.axisTop().scale(vis.x);
@@ -256,407 +266,5 @@ class HeatMap {
 			.style("font-size", "11px")
 			.style("font-weight", "500")
 			.text("Total Deaths per Month");
-	}
-
-	showYearAreaChart(selectedYear) {
-		let vis = this;
-
-		// Filter data for selected year
-		const data = vis.data.filter(d => 
-			+d.variable === +selectedYear
-		);
-
-		// If no data, return
-		if (data.length === 0) {
-			console.log("No data for", selectedYear);
-			return;
-		}
-
-		// Sort by month order
-		const monthOrder = ["January", "February", "March", "April", "May", "June", 
-							"July", "August", "September", "October", "November", "December"];
-		
-		const sortedData = data.sort((a, b) => 
-			monthOrder.indexOf(a.group) - monthOrder.indexOf(b.group)
-		);
-
-		// Clear existing chart
-		d3.select("#areaChart").selectAll("*").remove();
-
-		const margin = { top: 30, right: 50, bottom: 100, left: 50 },
-			width = 450 - margin.left - margin.right,
-			height = 350 - margin.top - margin.bottom;
-
-		const svg = d3.select("#areaChart")
-			.append("svg")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
-			.append("g")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-
-		// Scales
-		const x = d3.scalePoint()
-			.domain(sortedData.map(d => d.group))
-			.range([0, width])
-			.padding(0.5);
-
-		const maxValue = d3.max(sortedData, d => 
-			Math.max(+d.Male || 0, +d.Female || 0, +d.Trans || 0)
-		);
-
-		const y = d3.scaleLinear()
-			.domain([0, maxValue])
-			.nice()
-			.range([height, 0]);
-
-		// Gender categories and colors
-		const genders = [
-			{ key: "Male", color: "#4f88caff", name: "Male" },
-			{ key: "Female", color: "#d472bfff", name: "Female" },
-			{ key: "Trans", color: "#7f23bdff", name: "Trans/NB/2S" }
-		];
-
-		// Create gradients for each gender
-		const defs = svg.append("defs");
-		
-		genders.forEach(gender => {
-			const gradient = defs.append("linearGradient")
-				.attr("id", `area-gradient-${gender.key}`)
-				.attr("x1", "0%")
-				.attr("x2", "0%")
-				.attr("y1", "0%")
-				.attr("y2", "100%");
-
-			gradient.append("stop")
-				.attr("offset", "0%")
-				.attr("stop-color", gender.color)
-				.attr("stop-opacity", 0.5);
-
-			gradient.append("stop")
-				.attr("offset", "100%")
-				.attr("stop-color", gender.color)
-				.attr("stop-opacity", 0.1);
-		});
-
-		// Create area and line generators
-		const area = d3.area()
-			.x(d => x(d.group))
-			.y0(height)
-			.y1(d => y(d.value))
-			.curve(d3.curveMonotoneX);
-
-		const line = d3.line()
-			.x(d => x(d.group))
-			.y(d => y(d.value))
-			.curve(d3.curveMonotoneX);
-
-		// Draw areas and lines for each gender
-		genders.forEach(gender => {
-			const genderData = sortedData.map(d => ({
-				group: d.group,
-				value: +d[gender.key] || 0
-			}));
-
-			// Draw area
-			svg.append("path")
-				.datum(genderData)
-				.attr("class", `area-${gender.key}`)
-				.attr("fill", `url(#area-gradient-${gender.key})`)
-				.attr("d", area);
-
-			// Draw line
-			svg.append("path")
-				.datum(genderData)
-				.attr("class", `line-${gender.key}`)
-				.attr("fill", "none")
-				.attr("stroke", gender.color)
-				.attr("stroke-width", 2)
-				.attr("d", line);
-
-			// Add dots
-			svg.selectAll(`.dot-${gender.key}`)
-				.data(genderData)
-				.enter()
-				.append("circle")
-				.attr("class", `dot-${gender.key}`)
-				.attr("cx", d => x(d.group))
-				.attr("cy", d => y(d.value))
-				.attr("r", 3.5)
-				.attr("fill", gender.color)
-				.attr("stroke", "white")
-				.attr("stroke-width", 1.5)
-				.style("cursor", "pointer")
-				.on("mouseover", function(event, d) {
-					d3.select(this)
-						.transition()
-						.duration(150)
-						.attr("r", 5.5);
-					
-					// Remove any existing tooltips first
-					d3.selectAll(".area-tooltip").remove();
-					
-					// Show tooltip
-					d3.select("body")
-						.append("div")
-						.attr("class", "area-tooltip")
-						.style("position", "absolute")
-						.style("background", "rgba(255, 255, 255, 0.95)")
-						.style("border", `2px solid ${gender.color}`)
-						.style("border-radius", "6px")
-						.style("padding", "8px 10px")
-						.style("font-size", "12px")
-						.style("pointer-events", "none")
-						.style("z-index", "10000")
-						.style("box-shadow", "0 2px 4px rgba(0,0,0,0.2)")
-						.html(`<strong>${d.group}</strong><br><span style="color:${gender.color}">${gender.name}:</span> ${d.value}`)
-						.style("left", (event.pageX + 10) + "px")
-						.style("top", (event.pageY - 30) + "px")
-						.style("opacity", 0)
-						.transition()
-						.duration(200)
-						.style("opacity", 1);
-				})
-				.on("mouseout", function() {
-					d3.select(this)
-						.transition()
-						.duration(150)
-						.attr("r", 3.5);
-					
-					d3.selectAll(".area-tooltip")
-						.transition()
-						.duration(200)
-						.style("opacity", 0)
-						.remove();
-				});
-		});
-
-		// X axis
-		svg.append("g")
-			.attr("transform", `translate(0,${height})`)
-			.call(d3.axisBottom(x))
-			.selectAll("text")
-			.attr("transform", "rotate(-45)")
-			.style("text-anchor", "end")
-			.style("font-size", "10px");
-
-		// Y axis
-		svg.append("g")
-			.call(d3.axisLeft(y).ticks(6))
-			.style("font-size", "11px");
-
-		// Y axis label
-		svg.append("text")
-			.attr("transform", "rotate(-90)")
-			.attr("y", 0 - margin.left)
-			.attr("x", 0 - (height / 2))
-			.attr("dy", "1em")
-			.style("text-anchor", "middle")
-			.style("font-size", "12px")
-			.style("font-weight", "500")
-			.text("Deaths");
-
-		// Legend
-		const legend = svg.append("g")
-			.attr("transform", `translate(${width - 250}, -35)`);
-
-		genders.forEach((gender, i) => {
-			const legendItem = legend.append("g")
-				.attr("transform", `translate(${i * 90}, 0)`);
-
-			legendItem.append("line")
-				.attr("x1", 0)
-				.attr("x2", 20)
-				.attr("y1", 6)
-				.attr("y2", 6)
-				.attr("stroke", gender.color)
-				.attr("stroke-width", 2);
-
-			legendItem.append("circle")
-				.attr("cx", 10)
-				.attr("cy", 6)
-				.attr("r", 3)
-				.attr("fill", gender.color)
-				.attr("stroke", "white")
-				.attr("stroke-width", 1);
-
-			legendItem.append("text")
-				.attr("x", 25)
-				.attr("y", 10)
-				.text(gender.name)
-				.style("font-size", "11px")
-				.attr("alignment-baseline", "middle");
-		});
-
-		// Update panel title and show panel
-		d3.select("#areaPanelTitle").text(`Deaths by Gender — ${selectedYear}`);
-		d3.select("#areaPanel").style("display", "block");
-	}
-
-	showGenderChart(selectedMonth) {
-		let vis = this;
-
-		// Filter data for selected month and current year range
-		const data = vis.data.filter(d =>
-			d.group === selectedMonth &&
-			+d.variable >= vis.yearStart &&
-			+d.variable <= vis.yearEnd
-		);
-
-		// If no data, just return
-		if (data.length === 0) {
-			console.log("No data for", selectedMonth);
-			return;
-		}
-
-		// Aggregate by year
-		const grouped = d3.rollups(
-			data,
-			v => ({
-				Male: d3.sum(v, d => d.Male),
-				Female: d3.sum(v, d => d.Female),
-				Trans: d3.sum(v, d => d.Trans)
-			}),
-			d => +d.variable
-		).map(([year, vals]) => ({ year, ...vals }));
-
-		// Clear existing chart
-		d3.select("#genderChart").selectAll("*").remove();
-
-		const margin = { top: 30, right: 50, bottom: 100, left: 50 },
-			width = 450 - margin.left - margin.right,
-			height = 350 - margin.top - margin.bottom;
-
-		const svg = d3.select("#genderChart")
-			.append("svg")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
-			.append("g")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-
-		const subgroups = ["Male", "Female", "Trans"];
-		const groups = grouped.map(d => d.year);
-
-		const x = d3.scaleBand()
-			.domain(groups)
-			.range([0, width])
-			.padding(0.2);
-
-		const y = d3.scaleLinear()
-			.domain([0, d3.max(grouped, d => d.Male + d.Female + d.Trans)])
-			.nice()
-			.range([height, 0]);
-
-		const color = d3.scaleOrdinal()
-			.domain(subgroups)
-			.range(["#4f88caff", "#d472bfff", "#7f23bdff"]);
-
-		const stackedData = d3.stack().keys(subgroups)(grouped);
-
-		// X axis
-		svg.append("g")
-			.attr("transform", `translate(0,${height})`)
-			.call(d3.axisBottom(x)
-				.tickFormat(d3.format("d"))
-				.tickPadding(8))
-			.selectAll("text")
-			.attr("transform", "rotate(-40)")
-			.style("text-anchor", "end")
-			.style("font-size", "10.5px");
-
-		// Y axis
-		svg.append("g")
-			.call(d3.axisLeft(y).ticks(5))
-			.style("font-size", "11px");
-
-		// Bars
-		svg.selectAll("g.layer")
-			.data(stackedData)
-			.join("g")
-			.attr("fill", d => color(d.key))
-			.selectAll("rect")
-			.data(d => d)
-			.join("rect")
-			.attr("x", d => x(d.data.year))
-			.attr("y", d => y(d[1]))
-			.attr("height", d => y(d[0]) - y(d[1]))
-			.attr("width", x.bandwidth())
-			.style("cursor", "pointer")
-			.on("mouseover", function(event, d) {
-				// Get the parent data to know which gender this is
-				const genderKey = d3.select(this.parentNode).datum().key;
-				const genderValue = d.data[genderKey];
-				const total = d.data.Male + d.data.Female + d.data.Trans;
-				
-				// Highlight the bar
-				d3.select(this)
-					.style("opacity", 0.8)
-					.style("stroke", "#333")
-					.style("stroke-width", 1.5);
-				
-				// Remove any existing tooltips first
-				d3.selectAll(".gender-tooltip").remove();
-				
-				// Show tooltip
-				d3.select("body")
-					.append("div")
-					.attr("class", "gender-tooltip")
-					.style("position", "absolute")
-					.style("background", "rgba(255, 255, 255, 0.95)")
-					.style("border", `2px solid ${color(genderKey)}`)
-					.style("border-radius", "6px")
-					.style("padding", "10px 12px")
-					.style("font-size", "12px")
-					.style("pointer-events", "none")
-					.style("z-index", "10000")
-					.style("box-shadow", "0 2px 6px rgba(0,0,0,0.2)")
-					.html(`
-						<strong>Year: ${d.data.year}</strong><br>
-						<span style="color:${color(genderKey)}; font-weight:600;">${genderKey}:</span> ${genderValue}<br>
-						<span style="color:#666;">Total: ${total}</span>
-					`)
-					.style("left", (event.pageX + 10) + "px")
-					.style("top", (event.pageY - 50) + "px")
-					.style("opacity", 0)
-					.transition()
-					.duration(200)
-					.style("opacity", 1);
-			})
-			.on("mouseout", function() {
-				// Remove highlight
-				d3.select(this)
-					.style("opacity", 1)
-					.style("stroke", "none");
-				
-				// Remove tooltip
-				d3.selectAll(".gender-tooltip")
-					.transition()
-					.duration(200)
-					.style("opacity", 0)
-					.remove();
-			});
-
-		// Legend
-		const legend = svg.append("g")
-			.attr("transform", `translate(${width - 220}, -25)`);
-
-		subgroups.forEach((key, i) => {
-			legend.append("rect")
-				.attr("x", i * 75)
-				.attr("y", 0)
-				.attr("width", 12)
-				.attr("height", 12)
-				.attr("fill", color(key));
-
-			legend.append("text")
-				.attr("x", i * 75 + 17)
-				.attr("y", 10)
-				.text(key)
-				.style("font-size", "11px")
-				.attr("alignment-baseline", "middle");
-		});
-
-		// Update panel title and show panel
-		d3.select("#panelTitle").text(`Deaths by Gender — ${selectedMonth}`);
-		d3.select("#genderPanel").style("display", "block");
 	}
 }

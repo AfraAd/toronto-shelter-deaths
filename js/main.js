@@ -1,22 +1,49 @@
 // Variables for the visualization instances
 let heatmap;
+let linegraph;
+let bargraph;
+
+// Global filters that apply to all visualizations
+let globalFilters = {
+  yearRange: [2007, 2024],
+  genderFilters: {
+    male: true,
+    female: true,
+    trans: true
+  }
+};
+
+// Store the clean data globally
+let globalData = [];
 
 // Start application by loading the data
 loadData();
 
 function loadData() {
   d3.json("data/Deaths of Shelter Residents.json").then(function (data) {
-    // Prepare the data for heatmap format
-    let clean_data = prepareData(data);
-    console.log("data is loaded");
-    console.log(clean_data.slice(0, 5));
+    // Prepare the data for visualization format
+    globalData = prepareData(data);
+    console.log("Data is loaded");
+    console.log("Sample data:", globalData.slice(0, 5));
 
-    // Create heatmap visualization
-    heatmap = new HeatMap("heatmap", clean_data);
+    // Initialize global filters
+    setupGlobalFilters();
+
+    // Build the brush chart for year range selection - with delay to ensure DOM is ready
+    setTimeout(() => buildBrushChart(globalData), 100);
+
+    // Create all visualizations
+    heatmap = new HeatMap("heatmap", globalData, globalFilters);
     heatmap.initVis();
 
-    // Build the dual-handle year range slider
-    buildYearRangeSlider(clean_data);
+    linegraph = new LineGraph("lineChart", globalData, globalFilters);
+    linegraph.initVis();
+
+    bargraph = new BarGraph("barChart", globalData, globalFilters);
+    bargraph.initVis();
+
+    // Initialize tab functionality
+    setupTabs();
   });
 }
 
@@ -28,9 +55,25 @@ function prepareData(data) {
     return num;
   };
 
+  // Map abbreviated months to full names
+  const monthMap = {
+    'Jan': 'January',
+    'Feb': 'February',
+    'Mar': 'March',
+    'Apr': 'April',
+    'May': 'May',
+    'Jun': 'June',
+    'Jul': 'July',
+    'Aug': 'August',
+    'Sep': 'September',
+    'Oct': 'October',
+    'Nov': 'November',
+    'Dec': 'December'
+  };
+
   return data.map((d) => ({
     variable: d.Year,
-    group: d.Month,
+    group: monthMap[d.Month] || d.Month,
     value: parseCount(d["Total decedents"]),
     Male: parseCount(d.Male),
     Female: parseCount(d.Female),
@@ -39,126 +82,184 @@ function prepareData(data) {
 }
 
 // =====================================================
-// DUAL-HANDLE D3 YEAR RANGE SLIDER
+// GLOBAL FILTERS SETUP
 // =====================================================
 
-function buildYearRangeSlider(clean_data) {
-  const years = clean_data.map((d) => +d.variable);
-  const minYear = d3.min(years);
-  const maxYear = d3.max(years);
+function setupGlobalFilters() {
+  // Gender filter listeners
+  ['male', 'female', 'trans'].forEach(gender => {
+    const checkbox = d3.select(`#filter-${gender}`);
+    const label = checkbox.node().parentElement;
+    
+    checkbox.on('change', function() {
+      globalFilters.genderFilters[gender] = this.checked;
+      
+      if (this.checked) {
+        label.classList.add('checked');
+      } else {
+        label.classList.remove('checked');
+      }
+      
+      // Update all visualizations
+      updateAllVisualizations();
+    });
+  });
 
-  const sliderWidth = 350;
-  const sliderHeight = 60;
+  // Reset brush button
+  d3.select("#resetBrush").on("click", () => {
+    globalFilters.yearRange = [2007, 2024];
+    const brushGroup = d3.select("#brushGroup");
+    if (!brushGroup.empty() && window.brush) {
+      brushGroup.call(window.brush.move, null);
+    }
+    d3.select("#yearRangeDisplay").text("2007 — 2024");
+    updateAllVisualizations();
+  });
+}
 
-  const svgSlider = d3
-    .select("#yearRange")
+// Update all visualizations when filters change
+function updateAllVisualizations() {
+  if (heatmap) heatmap.wrangleData();
+  if (linegraph) linegraph.wrangleData();
+  if (bargraph) bargraph.wrangleData();
+}
+
+// =====================================================
+// BRUSH CHART FOR YEAR RANGE SELECTION
+// =====================================================
+
+function buildBrushChart(clean_data) {
+  // Prepare data for brush chart (yearly totals)
+  const yearGroups = d3.group(clean_data, d => d.variable);
+  const brushData = Array.from(yearGroups, ([year, values]) => ({
+    year: +year,
+    total: d3.sum(values, v => v.value || 0)
+  })).sort((a, b) => a.year - b.year);
+  
+  // Get container width
+  const container = document.getElementById('brushChart');
+  if (!container) {
+    console.error('brushChart container not found');
+    return;
+  }
+  
+  const margin = {top: 10, right: 30, bottom: 30, left: 50};
+  const containerWidth = container.getBoundingClientRect().width || 800;
+  const width = Math.max(300, containerWidth - margin.left - margin.right);
+  const height = 80;
+  
+  // Clear any existing SVG
+  d3.select("#brushChart").selectAll("*").remove();
+  
+  // Create SVG for brush chart
+  const svg = d3.select("#brushChart")
     .append("svg")
-    .attr("width", sliderWidth)
-    .attr("height", sliderHeight);
-
-  const sliderGroup = svgSlider
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(20,30)");
-
-  const xScale = d3
-    .scaleLinear()
-    .domain([minYear, maxYear])
-    .range([0, sliderWidth - 80])
-    .clamp(true);
-
-  // Slider track
-  sliderGroup
-    .append("line")
-    .attr("class", "track")
-    .attr("x1", xScale.range()[0])
-    .attr("x2", xScale.range()[1])
-    .attr("stroke", "#ccc")
-    .attr("stroke-width", 6)
-    .attr("stroke-linecap", "round");
-
-  // Active range highlight
-  const rangeHighlight = sliderGroup
-    .append("line")
-    .attr("class", "track-inset")
-    .attr("x1", xScale(minYear))
-    .attr("x2", xScale(maxYear))
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+  
+  // Scales for brush chart
+  const xScale = d3.scaleLinear()
+    .domain(d3.extent(brushData, d => d.year))
+    .range([0, width]);
+  
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(brushData, d => d.total)])
+    .range([height, 0]);
+  
+  // Area generator
+  const area = d3.area()
+    .x(d => xScale(d.year))
+    .y0(height)
+    .y1(d => yScale(d.total))
+    .curve(d3.curveMonotoneX);
+  
+  // Draw area
+  svg.append("path")
+    .datum(brushData)
+    .attr("class", "brush-area")
+    .attr("fill", "#134fbdff")
+    .attr("fill-opacity", 0.3)
     .attr("stroke", "#134fbdff")
-    .attr("stroke-width", 6)
-    .attr("stroke-linecap", "round");
-
-  // Initialize handles
-  let handles = [minYear, maxYear];
-
-  // Define drag behavior
-  const drag = d3
-    .drag()
-    .on("drag", function (event, d) {
-      const index = +d3.select(this).attr("data-index");
-      let newYear = Math.round(xScale.invert(event.x));
-
-      // Clamp within bounds
-      newYear = Math.max(minYear, Math.min(maxYear, newYear));
-      handles[index] = newYear;
-
-      // Keep handles ordered
-      if (handles[0] > handles[1]) handles.reverse();
-
-      updateHandles();
-    })
-    .on("end", updateHeatmap);
-
-  // Create handle circles
-  const handleElems = [0, 1].map((i) =>
-    sliderGroup
-      .append("circle")
-      .attr("r", 8)
-      .attr("fill", "#134fbdff")
-      .attr("cy", 0)
-      .attr("data-index", i)
-      .call(drag)
-  );
-
-  // Update handle and label positions
-  function updateHandles() {
-    handleElems[0].attr("cx", xScale(handles[0]));
-    handleElems[1].attr("cx", xScale(handles[1]));
-    rangeHighlight
-      .attr("x1", xScale(handles[0]))
-      .attr("x2", xScale(handles[1]));
-    d3.select("#yearValue").text(`${handles[0]} – ${handles[1]}`);
-  }
-
-  // Update heatmap when range changes
-  function updateHeatmap() {
-    heatmap.yearStart = handles[0];
-    heatmap.yearEnd = handles[1];
-    heatmap.wrangleData();
-  }
-
-  // Tick marks under the slider
-  const ticks = xScale.ticks(maxYear - minYear > 10 ? 10 : maxYear - minYear);
-  sliderGroup
-    .selectAll(".tick-label")
-    .data(ticks)
-    .enter()
-    .append("text")
-    .attr("class", "tick-label")
-    .attr("x", (d) => xScale(d))
-    .attr("y", 25)
-    .attr("text-anchor", "middle")
+    .attr("stroke-width", 1.5)
+    .attr("d", area);
+  
+  // X axis
+  svg.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(10))
+    .style("font-size", "10px");
+  
+  // Y axis
+  svg.append("g")
+    .call(d3.axisLeft(yScale).ticks(3))
+    .style("font-size", "10px");
+  
+  // Y axis label
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left + 10)
+    .attr("x", -height / 2)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
     .style("font-size", "10px")
-    .style("fill", "#555")
-    .text((d) => d);
+    .text("Deaths");
+  
+  // Add brush
+  window.brush = d3.brushX()
+    .extent([[0, 0], [width, height]])
+    .on("end", function(event) {
+      if (!event.selection) {
+        globalFilters.yearRange = [2007, 2024];
+        d3.select("#yearRangeDisplay").text("2007 — 2024");
+      } else {
+        const [x0, x1] = event.selection;
+        globalFilters.yearRange = [
+          Math.round(xScale.invert(x0)),
+          Math.round(xScale.invert(x1))
+        ];
+        d3.select("#yearRangeDisplay").text(
+          `${globalFilters.yearRange[0]} — ${globalFilters.yearRange[1]}`
+        );
+      }
+      updateAllVisualizations();
+    });
+  
+  svg.append("g")
+    .attr("id", "brushGroup")
+    .attr("class", "brush")
+    .call(window.brush);
+}
 
-  // Initialize slider visually
-  updateHandles();
+// =====================================================
+// TAB FUNCTIONALITY
+// =====================================================
 
-  // Close button handlers for both panels
-  d3.select("#closePanel").on("click", () => {
-    d3.select("#genderPanel").style("display", "none");
+function setupTabs() {
+  const tabs = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active class from all tabs and contents
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      // Add active class to clicked tab
+      tab.classList.add('active');
+
+      // Show corresponding content
+      const tabId = tab.getAttribute('data-tab');
+      const content = document.getElementById(tabId);
+      if (content) {
+        content.classList.add('active');
+      }
+    });
   });
 
-  d3.select("#closeAreaPanel").on("click", () => {
-    d3.select("#areaPanel").style("display", "none");
-  });
+  // Activate first tab by default
+  if (tabs.length > 0) {
+    tabs[0].click();
+  }
 }

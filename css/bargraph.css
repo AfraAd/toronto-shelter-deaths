@@ -1,0 +1,515 @@
+/* =====================================================
+   BAR GRAPH SPECIFIC STYLES
+   ===================================================== */
+
+#barChart {
+    width: 100%;
+    min-height: 600px;
+    position: relative;
+}
+
+#barChart svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* =====================================================
+   BAR ELEMENTS
+   ===================================================== */
+
+#barChart .bar-layer {
+    transition: opacity 0.3s ease;
+}
+
+#barChart .bar-layer rect {
+    stroke: white;
+    stroke-width: 1.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#barChart .bar-layer rect:hover {
+    filter: brightness(0.85);
+    stroke-width: 2px;
+    stroke: #134fbdff;
+}
+
+/* Individual gender bar colors */
+.bar-layer[fill="#4f88caff"] rect {
+    fill: #4f88caff;
+}
+
+.bar-layer[fill="#d472bfff"] rect {
+    fill: #d472bfff;
+}
+
+.bar-layer[fill="#7f23bdff"] rect {
+    fill: #7f23bdff;
+}
+
+/* =====================================================
+   AXES
+   ===================================================== */
+
+#barChart .x-axis path,
+#barChart .x-axis line {
+    stroke: #666;
+    stroke-width: 1.5px;
+}
+
+#barChart .y-axis path,
+#barChart .y-axis line {
+    stroke: #666;
+    stroke-width: 1.5px;
+}
+
+#barChart .x-axis text {
+    font-size: 12px;
+    font-weight: 500;
+    fill: #555;
+}
+
+#barChart .y-axis text {
+    font-size: 12px;
+    font-weight: 500;
+    fill: #555;
+}
+
+#barChart .x-axis-label,
+#barChart .y-axis-label {
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333;
+}
+
+/* =====================================================
+   LEGEND
+   ===================================================== */
+
+#barChart .legend {
+    font-family: 'Roboto', sans-serif;
+}
+
+#barChart .legend text {
+    font-size: 13px;
+    fill: #333;
+    font-weight: 500;
+}
+
+#barChart .legend rect {
+    stroke: white;
+    stroke-width: 1px;
+}
+
+#barChart .legend g {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#barChart .legend g:hover {
+    opacity: 0.8;
+    transform: translateX(3px);
+}
+
+/* =====================================================
+   TOOLTIP
+   ===================================================== */
+
+.bar-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10000;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.bar-tooltip strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 4px;
+}
+
+.bar-tooltip span {
+    font-size: 13px;
+    line-height: 1.6;
+    display: block;
+}
+
+/* =====================================================
+   GRID LINES (OPTIONAL)
+   ===================================================== */
+
+#barChart .grid line {
+    stroke: #e0e0e0;
+    stroke-opacity: 0.5;
+    stroke-width: 1px;
+    stroke-dasharray: 3, 3;
+}
+
+#barChart .grid path {
+    stroke-width: 0;
+}
+
+/* =====================================================
+   BAR ANIMATION
+   ===================================================== */
+
+@keyframes barGrowUp {
+    from {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    to {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+#barChart .bar-layer.animating rect {
+    animation: barGrowUp 0.8s ease-out;
+}
+
+@keyframes barSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#barChart .bar-layer.slide-in {
+    animation: barSlideIn 0.6s ease-out;
+}
+
+/* =====================================================
+   STACKED BAR PATTERNS
+   ===================================================== */
+
+#barChart .bar-layer:nth-child(1) rect {
+    /* First layer (bottom of stack) */
+}
+
+#barChart .bar-layer:nth-child(2) rect {
+    /* Second layer */
+}
+
+#barChart .bar-layer:nth-child(3) rect {
+    /* Third layer (top of stack) */
+}
+
+/* =====================================================
+   HOVER EFFECTS FOR ENTIRE BARS
+   ===================================================== */
+
+#barChart .bar-group:hover .bar-layer rect {
+    filter: brightness(0.9);
+}
+
+/* =====================================================
+   VALUE LABELS (OPTIONAL)
+   ===================================================== */
+
+#barChart .value-label {
+    font-size: 11px;
+    font-weight: 600;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+#barChart .value-label.inside {
+    fill: white;
+}
+
+/* =====================================================
+   BASELINE & ZERO LINE
+   ===================================================== */
+
+#barChart .baseline {
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+#barChart .zero-line {
+    stroke: #999;
+    stroke-width: 1px;
+    stroke-dasharray: 4, 4;
+}
+
+/* =====================================================
+   AVERAGE LINE (OPTIONAL)
+   ===================================================== */
+
+#barChart .average-line {
+    stroke: #ff6b6b;
+    stroke-width: 2px;
+    stroke-dasharray: 5, 5;
+    opacity: 0.7;
+}
+
+#barChart .average-label {
+    font-size: 11px;
+    fill: #ff6b6b;
+    font-weight: 600;
+}
+
+/* =====================================================
+   COMPARISON BARS (SIDE-BY-SIDE)
+   ===================================================== */
+
+#barChart .bar-group {
+    transition: all 0.3s ease;
+}
+
+#barChart .bar-group.highlighted {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 1400px) {
+    #barChart {
+        min-height: 550px;
+    }
+    
+    #barChart .legend {
+        transform: translate(calc(100% - 20px), 20px);
+    }
+}
+
+@media (max-width: 1024px) {
+    #barChart {
+        min-height: 500px;
+    }
+    
+    #barChart .x-axis text {
+        font-size: 10px;
+    }
+    
+    #barChart .legend text {
+        font-size: 11px;
+    }
+    
+    .bar-tooltip {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #barChart {
+        min-height: 450px;
+    }
+    
+    #barChart .x-axis text {
+        font-size: 9px;
+    }
+    
+    #barChart .bar-layer rect {
+        stroke-width: 1px;
+    }
+    
+    #barChart .legend {
+        transform: translate(0, calc(100% + 30px));
+    }
+    
+    #barChart .value-label {
+        font-size: 9px;
+    }
+}
+
+/* =====================================================
+   LOADING STATE
+   ===================================================== */
+
+#barChart.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+}
+
+#barChart.loading::before {
+    content: 'Loading bar chart...';
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+
+#barChart.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    color: #999;
+    font-size: 16px;
+}
+
+#barChart.empty::before {
+    content: 'No data available for the selected filters';
+    font-weight: 500;
+}
+
+/* =====================================================
+   INTERACTION STATES
+   ===================================================== */
+
+#barChart .bar-layer.dimmed {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+}
+
+#barChart .bar-layer.selected rect {
+    stroke: #134fbdff;
+    stroke-width: 3px;
+    filter: brightness(0.95);
+}
+
+/* =====================================================
+   PATTERN FILLS (ALTERNATIVE VISUALIZATION)
+   ===================================================== */
+
+#barChart .pattern-male {
+    fill: url(#pattern-male);
+}
+
+#barChart .pattern-female {
+    fill: url(#pattern-female);
+}
+
+#barChart .pattern-trans {
+    fill: url(#pattern-trans);
+}
+
+/* =====================================================
+   BAR SORTING ANIMATION
+   ===================================================== */
+
+@keyframes barReorder {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+}
+
+#barChart .bar-layer.reordering rect {
+    animation: barReorder 0.5s ease-in-out;
+}
+
+/* =====================================================
+   GRADIENT BARS (OPTIONAL ENHANCEMENT)
+   ===================================================== */
+
+#barChart .bar-gradient-male {
+    fill: url(#gradient-male);
+}
+
+#barChart .bar-gradient-female {
+    fill: url(#gradient-female);
+}
+
+#barChart .bar-gradient-trans {
+    fill: url(#gradient-trans);
+}
+
+/* =====================================================
+   ERROR BARS (OPTIONAL)
+   ===================================================== */
+
+#barChart .error-bar {
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+#barChart .error-cap {
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+/* =====================================================
+   ANNOTATIONS
+   ===================================================== */
+
+#barChart .annotation {
+    font-size: 11px;
+    fill: #666;
+    font-weight: 500;
+}
+
+#barChart .annotation-line {
+    stroke: #999;
+    stroke-width: 1px;
+    stroke-dasharray: 2, 2;
+}
+
+#barChart .annotation-box {
+    fill: white;
+    stroke: #999;
+    stroke-width: 1px;
+    rx: 4;
+    ry: 4;
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+
+@media print {
+    #barChart {
+        page-break-inside: avoid;
+    }
+    
+    .bar-tooltip {
+        display: none;
+    }
+    
+    #barChart .bar-layer rect {
+        stroke-width: 1px;
+    }
+    
+    #barChart .legend {
+        border: 1px solid #000;
+        padding: 10px;
+    }
+}
+
+/* =====================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ===================================================== */
+
+#barChart .bar-layer rect:focus {
+    outline: 2px solid #134fbdff;
+    outline-offset: 2px;
+}
+
+#barChart .bar-layer rect[aria-selected="true"] {
+    stroke: #134fbdff;
+    stroke-width: 3px;
+}
+
+/* =====================================================
+   COMPARISON MODE
+   ===================================================== */
+
+#barChart.comparison-mode .bar-layer rect {
+    opacity: 0.7;
+}
+
+#barChart.comparison-mode .bar-layer.active rect {
+    opacity: 1;
+}
