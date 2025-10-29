@@ -134,6 +134,75 @@ class LineGraph {
 		vis.yAxisGroup.call(d3.axisLeft(vis.y))
 			.style("font-size", "12px");
 
+		// --- COVID-19 start indicator (Jan 2020) ---
+		const covidDate = new Date(2020, 0); // January 2020
+		const covidSelector = vis.svg.selectAll(".covid-line-group").data(
+			(covidDate >= vis.x.domain()[0] && covidDate <= vis.x.domain()[1]) ? [covidDate] : []
+		);
+
+		// EXIT: Animate line retracting downward
+		covidSelector.exit()
+			.transition()
+			.duration(800)
+			.ease(d3.easeCubicInOut)
+			.attr("opacity", 1)
+			.select("line")
+			.attr("y2", vis.height)
+			.on("end", function() {
+				d3.select(this.parentNode).remove();
+			});
+
+		// ENTER: Animate line drawing upward
+		const covidEnter = covidSelector.enter()
+			.append("g")
+			.attr("class", "covid-line-group")
+			.attr("opacity", 0);
+
+		covidEnter.append("line")
+			.attr("class", "covid-line")
+			.attr("x1", d => vis.x(d))
+			.attr("x2", d => vis.x(d))
+			.attr("y1", vis.height)
+			.attr("y2", vis.height)
+			.attr("stroke", "red")
+			.attr("stroke-width", 2)
+			.attr("stroke-dasharray", "6 4");
+
+		covidEnter.append("text")
+			.attr("class", "covid-label")
+			.attr("x", d => vis.x(d) + 6)
+			.attr("y", 15)
+			.attr("fill", "red")
+			.attr("font-size", "13px")
+			.attr("font-weight", "600")
+			.text("COVID-19 Begins (Jan 2020)");
+
+		// Animate appearance
+		covidEnter.transition()
+			.duration(800)
+			.ease(d3.easeCubicInOut)
+			.attr("opacity", 1)
+			.on("start", function() {
+				d3.select(this).select("line")
+					.transition()
+					.duration(800)
+					.attr("y2", 0);
+			});
+
+		// UPDATE: Keep it aligned during resizes or transitions
+		covidSelector.select("line")
+			.transition()
+			.duration(600)
+			.attr("x1", d => vis.x(d))
+			.attr("x2", d => vis.x(d))
+			.attr("y1", 0)
+			.attr("y2", vis.height);
+
+		covidSelector.select("text")
+			.transition()
+			.duration(600)
+			.attr("x", d => vis.x(d) + 6);
+
 		// Define all gender lines based on global filters
 		const allGenders = [
 			{ key: 'Male', name: 'Male', color: '#4f88caff', enabled: vis.globalFilters.genderFilters.male },
