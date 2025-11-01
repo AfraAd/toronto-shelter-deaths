@@ -222,17 +222,23 @@ class BarGraph {
 		
 		// Y-axis: Based on total average
 		const maxY = d3.max(vis.displayData, d => d.Total);
+		const oldYDomain = vis.y.domain();
 		vis.y.domain([0, maxY * 1.15]).nice();
 
-		// Update axes
+		// Smoothly transition Y-axis
+		vis.yAxisGroup
+			.transition()
+			.duration(600)
+			.ease(d3.easeCubicInOut)
+			.call(d3.axisLeft(vis.y))
+			.style("font-size", "12px");
+
+		// Update X-axis (no transition needed)
 		vis.xAxisGroup.call(d3.axisBottom(vis.x))
 			.selectAll("text")
 			.style("font-size", "11px")
 			.attr("transform", "rotate(-45)")
 			.style("text-anchor", "end");
-		
-		vis.yAxisGroup.call(d3.axisLeft(vis.y))
-			.style("font-size", "12px");
 
 		// Define gender categories to stack
 		const allGenders = [
@@ -253,7 +259,24 @@ class BarGraph {
 
 		// Bind data to groups (one per gender category)
 		const layers = vis.svg.selectAll(".bar-layer")
-			.data(stackedData);
+			.data(stackedData, d => d.key);
+
+		// EXIT: Animate layers being removed by squashing to their base
+		layers.exit()
+			.each(function(d) {
+				d3.select(this).selectAll("rect")
+					.transition()
+					.duration(600)
+					.ease(d3.easeCubicInOut)
+					.attr("y", d => vis.y(d[0])) // Squash to base position
+					.attr("height", 0)
+					.on("end", function(d, i, nodes) {
+						// Only remove parent after last rect finishes
+						if (i === nodes.length - 1) {
+							d3.select(this.parentNode).remove();
+						}
+					});
+			});
 
 		// Enter new layers
 		const layersEnter = layers.enter()
@@ -268,22 +291,28 @@ class BarGraph {
 			return gender ? gender.color : "#999";
 		});
 
-		// Remove old layers
-		layers.exit().remove();
-
 		// Bind rectangles within each layer
 		const bars = layersMerge.selectAll("rect")
-			.data(d => d);
+			.data(d => d, (d, i) => d.data.month);
 
-		// Enter new bars
+		// EXIT: Remove bars by squashing to their base position
+		bars.exit()
+			.transition()
+			.duration(600)
+			.ease(d3.easeCubicInOut)
+			.attr("y", d => vis.y(d[0]))
+			.attr("height", 0)
+			.remove();
+
+		// ENTER: New bars start from their base position (d[0]) with height 0
 		const barsEnter = bars.enter()
 			.append("rect")
 			.attr("x", d => vis.x(d.data.month))
-			.attr("y", vis.height)
-			.attr("height", 0)
+			.attr("y", d => vis.y(d[0])) // Start at base position (where previous section ends)
+			.attr("height", 0) // Start with height 0
 			.attr("width", vis.x.bandwidth());
 
-		// Merge and transition
+		// MERGE and UPDATE: Animate to new positions
 		barsEnter.merge(bars)
 			.on("mouseover", function(event, d) {
 				const gender = enabledGenders.find(g => g.key === this.parentNode.__data__.key);
@@ -292,16 +321,14 @@ class BarGraph {
 			.on("mouseout", function() {
 				vis.tooltip.transition().duration(200).style("opacity", 0);
 			})
+			.style("cursor", "pointer")
 			.transition()
-			.duration(800)
+			.duration(600)
+			.ease(d3.easeCubicInOut)
 			.attr("x", d => vis.x(d.data.month))
-			.attr("y", d => vis.y(d[1]))
-			.attr("height", d => vis.y(d[0]) - vis.y(d[1]))
-			.attr("width", vis.x.bandwidth())
-			.style("cursor", "pointer");
-
-		// Remove old bars
-		bars.exit().remove();
+			.attr("y", d => vis.y(d[1])) // Top of this section
+			.attr("height", d => vis.y(d[0]) - vis.y(d[1])) // Height of this section
+			.attr("width", vis.x.bandwidth());
 
 		// Update legend
 		vis.updateLegend(enabledGenders);

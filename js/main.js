@@ -186,7 +186,27 @@ function buildBrushChart(clean_data) {
   }
   
   const margin = {top: 10, right: 30, bottom: 30, left: 50};
-  const containerWidth = container.getBoundingClientRect().width || 800;
+  let containerWidth = 800;
+  if (container) {
+    const rect = container.getBoundingClientRect();
+    if (rect.width > 0) {
+      containerWidth = rect.width;
+    } else {
+      // If container width is 0 (hidden), try parent or use window width
+      const parent = container.closest('.tab-content');
+      if (parent) {
+        const parentRect = parent.getBoundingClientRect();
+        if (parentRect.width > 0) {
+          containerWidth = parentRect.width;
+        } else {
+          // Use a percentage of window width as fallback
+          containerWidth = Math.min(1200, window.innerWidth * 0.85);
+        }
+      } else {
+        containerWidth = Math.min(1200, window.innerWidth * 0.85);
+      }
+    }
+  }
   const width = Math.max(300, containerWidth - margin.left - margin.right);
   const height = 80;
   

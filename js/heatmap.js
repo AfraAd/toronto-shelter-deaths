@@ -241,26 +241,35 @@ class HeatMap {
 		vis.svg.selectAll(".value")
 			.on("mouseover", (event, d) => {
 				vis.tooltip.transition().duration(150).style("opacity", 1);
+				// Build tooltip rows based on selected filters
+				let rows = `<strong style="color:#d31c34;">${d.group} ${d.variable}</strong><br>
+				<span style="font-weight:500;">Total deaths:</span> ${d.filteredValue}<br>`;
+
+				if (vis.globalFilters.genderFilters.male) {
+					rows += `<span style="font-weight:500;">Male:</span> ${d.Male || 0}<br>`;
+				}
+				if (vis.globalFilters.genderFilters.female) {
+					rows += `<span style="font-weight:500;">Female:</span> ${d.Female || 0}<br>`;
+				}
+				if (vis.globalFilters.genderFilters.trans) {
+					rows += `<span style="font-weight:500;">Trans/NB/2S:</span> ${d.Trans || 0}<br>`;
+				}
+
 				vis.tooltip
 					.html(`
-					<div style="
-						background: rgba(255, 255, 255, 0.95);
-						border: 1px solid #d31c34;
-						border-radius: 6px;
-						padding: 10px 12px;
-						box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-						font-family: 'Roboto', sans-serif;
-						color: #333;
-						font-size: 13px;
-						line-height: 1.4em;
-						text-align: left;
-						pointer-events: none;">
-						<strong style="color:#d31c34;">${d.group} ${d.variable}</strong><br>
-						<span style="font-weight:500;">Total deaths:</span> ${d.value}<br>
-						<span style="font-weight:500;">Male:</span> ${d.Male || 0}<br>
-						<span style="font-weight:500;">Female:</span> ${d.Female || 0}<br>
-						<span style="font-weight:500;">Trans/NB/2S:</span> ${d.Trans || 0}
-					</div>
+						<div style="
+							background: rgba(255, 255, 255, 0.95);
+							border: 1px solid #d31c34;
+							border-radius: 6px;
+							padding: 10px 12px;
+							box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+							font-family: 'Roboto', sans-serif;
+							color: #333;
+							font-size: 13px;
+							line-height: 1.4em;
+							pointer-events: none;">
+							${rows}
+						</div>
 					`)
 					.style("left", (event.pageX + 15) + "px")
 					.style("top", (event.pageY - 35) + "px");
@@ -325,13 +334,18 @@ class HeatMap {
 			.attr("rx", 4)
 			.attr("ry", 4);
 
-		// Axis for the legend
+		// Axis for the legend - ensure max value is always shown
 		const legendScale = d3.scaleLinear()
 			.domain([0, maxValue])
 			.range([60, 60 + legendWidth]);
 
+		// Calculate nice tick values and ensure max is included
+		const tickCount = 6;
+		const tickStep = maxValue / (tickCount - 1);
+		const tickValues = d3.range(0, maxValue, tickStep).concat(maxValue);
+
 		const legendAxis = d3.axisBottom(legendScale)
-			.ticks(6)
+			.tickValues(tickValues)
 			.tickFormat(d3.format(".0f"));
 
 		legendSvg.append("g")
