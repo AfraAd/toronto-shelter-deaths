@@ -11,6 +11,9 @@ class HeatMap {
 		// Categories for x and y axis
 		this.cols = Array.from(new Set(data.map(d=> d.group)));
 		this.rows = Array.from(new Set(data.map(d=> d.variable)));
+		
+		// Add window resize listener
+		window.addEventListener('resize', () => this.handleResize());
 	}
 
 	/*
@@ -23,14 +26,39 @@ class HeatMap {
 
 		// Get container width with fallback
 		const container = document.getElementById(vis.parentElement);
-		const containerWidth = container ? container.getBoundingClientRect().width : 1200;
+		let containerWidth = 1200;
+		
+		if (container) {
+			const rect = container.getBoundingClientRect();
+			if (rect.width > 0) {
+				containerWidth = rect.width;
+			} else {
+				// If container width is 0 (hidden), try parent or use window width
+				const parent = container.closest('.tab-content');
+				if (parent) {
+					const parentRect = parent.getBoundingClientRect();
+					if (parentRect.width > 0) {
+						containerWidth = parentRect.width;
+					} else {
+						// Use a percentage of window width as fallback
+						containerWidth = Math.min(1200, window.innerWidth * 0.85);
+					}
+				} else {
+					containerWidth = Math.min(1200, window.innerWidth * 0.85);
+				}
+			}
+		}
 		vis.width = containerWidth - vis.margin.left - vis.margin.right;
-		vis.height = 600; // Fixed height for heatmap
+		// Make height responsive based on width, with min/max constraints
+		vis.height = Math.max(400, Math.min(700, vis.width * 0.5));
 
-		// SVG drawing area
+		// SVG drawing area with responsive viewBox
 		vis.svg = d3.select("#" + vis.parentElement).append("svg")
-			.attr("width", vis.width + vis.margin.left + vis.margin.right)
-			.attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+			.attr("width", "100%")
+			.attr("viewBox", `0 0 ${vis.width + vis.margin.left + vis.margin.right} ${vis.height + vis.margin.top + vis.margin.bottom}`)
+			.attr("preserveAspectRatio", "xMidYMid meet")
+			.style("max-width", "100%")
+			.style("height", "auto")
 			.append("g")
 			.attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
@@ -73,6 +101,59 @@ class HeatMap {
 							.style("z-index", "10000");
 	
 		vis.wrangleData();
+	}
+
+	handleResize() {
+		let vis = this;
+		
+		// Debounce resize events
+		clearTimeout(vis.resizeTimer);
+		vis.resizeTimer = setTimeout(() => {
+			const container = document.getElementById(vis.parentElement);
+			if (!container) return;
+			
+			let containerWidth = 1200;
+		
+			if (container) {
+				const rect = container.getBoundingClientRect();
+				if (rect.width > 0) {
+					containerWidth = rect.width;
+				} else {
+					// If container width is 0 (hidden), try parent or use window width
+					const parent = container.closest('.tab-content');
+					if (parent) {
+						const parentRect = parent.getBoundingClientRect();
+						if (parentRect.width > 0) {
+							containerWidth = parentRect.width;
+						} else {
+							// Use a percentage of window width as fallback
+							containerWidth = Math.min(1200, window.innerWidth * 0.85);
+						}
+					} else {
+						containerWidth = Math.min(1200, window.innerWidth * 0.85);
+					}
+				}
+			}
+			const newWidth = containerWidth - vis.margin.left - vis.margin.right;
+			const newHeight = Math.max(400, Math.min(700, newWidth * 0.5));
+			
+			// Only update if size actually changed significantly
+			if (Math.abs(newWidth - vis.width) > 50) {
+				vis.width = newWidth;
+				vis.height = newHeight;
+				
+				// Update viewBox
+				d3.select("#" + vis.parentElement).select("svg")
+					.attr("viewBox", `0 0 ${vis.width + vis.margin.left + vis.margin.right} ${vis.height + vis.margin.top + vis.margin.bottom}`);
+				
+				// Update scales
+				vis.x.range([0, vis.width]);
+				vis.y.range([vis.height, 0]);
+				
+				// Redraw visualization
+				vis.updateVis();
+			}
+		}, 250);
 	}
 
 	/*

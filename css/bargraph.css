@@ -5,7 +5,9 @@
 #barChart {
     width: 100%;
     min-height: 600px;
+    max-height: 90vh;
     position: relative;
+    overflow: visible;
 }
 
 #barChart svg {
@@ -102,13 +104,7 @@
 }
 
 #barChart .legend g {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#barChart .legend g:hover {
-    opacity: 0.8;
-    transform: translateX(3px);
+    pointer-events: none;
 }
 
 /* =====================================================
@@ -295,6 +291,10 @@
         font-size: 10px;
     }
     
+    #barChart .y-axis text {
+        font-size: 11px;
+    }
+    
     #barChart .legend text {
         font-size: 11px;
     }
@@ -312,6 +312,11 @@
     
     #barChart .x-axis text {
         font-size: 9px;
+        transform: rotate(-65deg);
+    }
+    
+    #barChart .y-axis text {
+        font-size: 10px;
     }
     
     #barChart .bar-layer rect {
@@ -319,11 +324,39 @@
     }
     
     #barChart .legend {
-        transform: translate(0, calc(100% + 30px));
+        transform: translate(10px, calc(100% + 20px));
     }
     
     #barChart .value-label {
         font-size: 9px;
+    }
+    
+    .bar-tooltip {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #barChart {
+        min-height: 400px;
+    }
+    
+    #barChart .x-axis text {
+        font-size: 8px;
+    }
+    
+    #barChart .y-axis text {
+        font-size: 9px;
+    }
+    
+    #barChart .legend text {
+        font-size: 10px;
+    }
+    
+    #barChart .x-axis-label,
+    #barChart .y-axis-label {
+        font-size: 12px;
     }
 }
 

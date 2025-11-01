@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="css/heatmap.css">
     <link rel="stylesheet" href="css/linegraph.css">
     <link rel="stylesheet" href="css/bargraph.css">
-
-    <style>
-        .filter-row { display: flex; flex-direction: column; gap: 1.5rem; }
-    </style>
 </head>
 <body>
 
@@ -120,6 +116,54 @@
             </div>
 
             <div class="row mt-5 mb-5"><div class="col-12" style="height: 50px;"></div></div>
+
+            <!-- Statistics and Insights Section -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-11">
+                    <div class="insights-section">
+                        <h3 class="insights-title">Key Insights & Trends</h3>
+                        <div class="insights-container">
+                            <div class="insights-text">
+                                <h4>COVID-19 Impact (2020-2024)</h4>
+                                <p>The data reveals a dramatic surge in shelter resident deaths beginning in 2020, coinciding with the COVID-19 pandemic. This period represents the most significant increase in mortality rates throughout the entire dataset.</p>
+                                
+                                <h4>Historical Context</h4>
+                                <p>Prior to 2020, shelter deaths remained relatively stable with gradual fluctuations. The pre-pandemic period (2007-2019) established a baseline that makes the subsequent spike particularly striking.</p>
+                                
+                                <h4>Ongoing Crisis</h4>
+                                <p>Deaths have remained elevated through 2024, indicating that the factors contributing to increased mortality - whether related to pandemic aftermath, housing instability, or healthcare access - continue to affect Toronto's vulnerable shelter population.</p>
+                            </div>
+                            
+                            <div class="insights-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value" id="prePandemicAvg">--</div>
+                                    <div class="stat-label">Pre-Pandemic Average<br>(2007-2019)</div>
+                                </div>
+                                
+                                <div class="stat-card highlight">
+                                    <div class="stat-value" id="pandemicAvg">--</div>
+                                    <div class="stat-label">Pandemic Average<br>(2020-2024)</div>
+                                </div>
+                                
+                                <div class="stat-card alert">
+                                    <div class="stat-value" id="percentIncrease">--%</div>
+                                    <div class="stat-label">Increase During Pandemic</div>
+                                </div>
+                                
+                                <div class="stat-card full-width">
+                                    <div class="stat-value" id="peakYear">----</div>
+                                    <div class="stat-label">Year with Highest Deaths</div>
+                                </div>
+                                
+                                <div class="stat-card full-width">
+                                    <div class="stat-value" id="totalDeaths">----</div>
+                                    <div class="stat-label">Total Deaths (2007-2024)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

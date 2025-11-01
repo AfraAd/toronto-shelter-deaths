@@ -5,7 +5,9 @@
 #lineChart {
     width: 100%;
     min-height: 600px;
+    max-height: 90vh;
     position: relative;
+    overflow: visible;
 }
 
 #lineChart svg {
@@ -134,13 +136,7 @@
 }
 
 #lineChart .legend g {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#lineChart .legend g:hover {
-    opacity: 0.8;
-    transform: translateX(3px);
+    pointer-events: none;
 }
 
 /* =====================================================
@@ -278,6 +274,11 @@
     #lineChart .legend text {
         font-size: 11px;
     }
+    
+    #lineChart .x-axis text,
+    #lineChart .y-axis text {
+        font-size: 11px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -295,7 +296,7 @@
     }
     
     #lineChart .legend {
-        transform: translate(0, calc(100% + 30px));
+        transform: translate(10px, calc(100% + 30px));
     }
     
     #lineChart .legend g {
@@ -305,6 +306,48 @@
     .line-tooltip {
         font-size: 11px;
         padding: 8px 10px;
+    }
+    
+    #lineChart .x-axis text,
+    #lineChart .y-axis text {
+        font-size: 10px;
+    }
+    
+    #lineChart .covid-label {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    #lineChart {
+        min-height: 350px;
+    }
+    
+    #lineChart .line-path {
+        stroke-width: 1.5px;
+    }
+    
+    #lineChart .x-axis text {
+        font-size: 9px;
+        transform: rotate(-45deg);
+        text-anchor: end;
+    }
+    
+    #lineChart .y-axis text {
+        font-size: 9px;
+    }
+    
+    #lineChart .legend {
+        font-size: 10px;
+    }
+    
+    #lineChart .covid-label {
+        font-size: 9px;
+    }
+    
+    .line-tooltip {
+        font-size: 10px;
+        padding: 6px 8px;
     }
 }
 

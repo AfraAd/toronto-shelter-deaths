@@ -44,6 +44,9 @@ function loadData() {
 
     // Initialize tab functionality
     setupTabs();
+    
+    // Calculate and display statistics
+    calculateStatistics(globalData);
   });
 }
 
@@ -122,6 +125,45 @@ function updateAllVisualizations() {
   if (heatmap) heatmap.wrangleData();
   if (linegraph) linegraph.wrangleData();
   if (bargraph) bargraph.wrangleData();
+}
+
+// =====================================================
+// CALCULATE AND DISPLAY STATISTICS
+// =====================================================
+
+function calculateStatistics(data) {
+  // Group data by year and calculate yearly totals
+  const yearGroups = d3.group(data, d => d.variable);
+  const yearlyTotals = Array.from(yearGroups, ([year, values]) => ({
+    year: +year,
+    total: d3.sum(values, v => v.value || 0)
+  })).sort((a, b) => a.year - b.year);
+  
+  // Pre-pandemic period (2007-2019)
+  const prePandemic = yearlyTotals.filter(d => d.year >= 2007 && d.year <= 2019);
+  const prePandemicAvg = d3.mean(prePandemic, d => d.total);
+  
+  // Pandemic period (2020-2024)
+  const pandemic = yearlyTotals.filter(d => d.year >= 2020 && d.year <= 2024);
+  const pandemicAvg = d3.mean(pandemic, d => d.total);
+  
+  // Calculate percent increase
+  const percentIncrease = ((pandemicAvg - prePandemicAvg) / prePandemicAvg) * 100;
+  
+  // Find peak year
+  const peakYearData = yearlyTotals.reduce((max, current) => 
+    current.total > max.total ? current : max
+  );
+  
+  // Calculate total deaths
+  const totalDeaths = d3.sum(yearlyTotals, d => d.total);
+  
+  // Update the DOM
+  document.getElementById('prePandemicAvg').textContent = Math.round(prePandemicAvg);
+  document.getElementById('pandemicAvg').textContent = Math.round(pandemicAvg);
+  document.getElementById('percentIncrease').textContent = `+${Math.round(percentIncrease)}%`;
+  document.getElementById('peakYear').textContent = `${peakYearData.year} (${peakYearData.total})`;
+  document.getElementById('totalDeaths').textContent = totalDeaths.toLocaleString();
 }
 
 // =====================================================
@@ -254,6 +296,18 @@ function setupTabs() {
       const content = document.getElementById(tabId);
       if (content) {
         content.classList.add('active');
+        
+        // Recalculate sizes for visualizations when their tab becomes visible
+        // Use setTimeout to ensure DOM has updated
+        setTimeout(() => {
+          if (tabId === 'linechart-tab' && linegraph && linegraph.recalculateSize) {
+            linegraph.recalculateSize();
+          } else if (tabId === 'barchart-tab' && bargraph && bargraph.recalculateSize) {
+            bargraph.recalculateSize();
+          } else if (tabId === 'heatmap-tab' && heatmap && heatmap.recalculateSize) {
+            heatmap.recalculateSize();
+          }
+        }, 50);
       }
     });
   });

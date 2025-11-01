@@ -10,6 +10,9 @@ class BarGraph {
 		// Month names in order
 		this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
 						   'July', 'August', 'September', 'October', 'November', 'December'];
+		
+		// Add window resize listener
+		window.addEventListener('resize', () => this.handleResize());
 	}
 
 	/*
@@ -27,15 +30,32 @@ class BarGraph {
 			const rect = container.getBoundingClientRect();
 			if (rect.width > 0) {
 				containerWidth = rect.width;
+			} else {
+				// If container width is 0 (hidden), try parent or use window width
+				const parent = container.closest('.tab-content');
+				if (parent) {
+					const parentRect = parent.getBoundingClientRect();
+					if (parentRect.width > 0) {
+						containerWidth = parentRect.width;
+					} else {
+						// Use a percentage of window width as fallback
+						containerWidth = Math.min(1200, window.innerWidth * 0.85);
+					}
+				} else {
+					containerWidth = Math.min(1200, window.innerWidth * 0.85);
+				}
 			}
 		}
 		vis.width = containerWidth - vis.margin.left - vis.margin.right;
-		vis.height = 500;
+		vis.height = Math.max(400, Math.min(600, vis.width * 0.4));
 
-		// SVG drawing area
+		// SVG drawing area with responsive viewBox
 		vis.svg = d3.select("#" + vis.parentElement).append("svg")
-			.attr("width", vis.width + vis.margin.left + vis.margin.right)
-			.attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+			.attr("width", "100%")
+			.attr("viewBox", `0 0 ${vis.width + vis.margin.left + vis.margin.right} ${vis.height + vis.margin.top + vis.margin.bottom}`)
+			.attr("preserveAspectRatio", "xMidYMid meet")
+			.style("max-width", "100%")
+			.style("height", "auto")
 			.append("g")
 			.attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
@@ -97,6 +117,67 @@ class BarGraph {
 			.style("box-shadow", "0 2px 6px rgba(0,0,0,0.2)");
 		
 		vis.wrangleData();
+	}
+
+	handleResize() {
+		let vis = this;
+		
+		// Debounce resize events
+		clearTimeout(vis.resizeTimer);
+		vis.resizeTimer = setTimeout(() => {
+			const container = document.getElementById(vis.parentElement);
+			if (!container) return;
+			
+			let containerWidth = 1200;
+			if (container) {
+				const rect = container.getBoundingClientRect();
+				if (rect.width > 0) {
+					containerWidth = rect.width;
+				} else {
+					// If container width is 0 (hidden), try parent or use window width
+					const parent = container.closest('.tab-content');
+					if (parent) {
+						const parentRect = parent.getBoundingClientRect();
+						if (parentRect.width > 0) {
+							containerWidth = parentRect.width;
+						} else {
+							// Use a percentage of window width as fallback
+							containerWidth = Math.min(1200, window.innerWidth * 0.85);
+						}
+					} else {
+						containerWidth = Math.min(1200, window.innerWidth * 0.85);
+					}
+				}
+			}
+			const newWidth = containerWidth - vis.margin.left - vis.margin.right;
+			const newHeight = Math.max(400, Math.min(600, newWidth * 0.4));
+			
+			// Only update if size actually changed significantly
+			if (Math.abs(newWidth - vis.width) > 50) {
+				vis.width = newWidth;
+				vis.height = newHeight;
+				
+				// Update viewBox
+				d3.select("#" + vis.parentElement).select("svg")
+					.attr("viewBox", `0 0 ${vis.width + vis.margin.left + vis.margin.right} ${vis.height + vis.margin.top + vis.margin.bottom}`);
+				
+				// Update scales
+				vis.x.range([0, vis.width]);
+				vis.y.range([vis.height, 0]);
+				
+				// Update axis positions
+				vis.xAxisGroup.attr("transform", `translate(0,${vis.height})`);
+				vis.svg.select(".x-axis-label")
+					.attr("x", vis.width / 2)
+					.attr("y", vis.height + 65);
+				vis.svg.select(".y-axis-label")
+					.attr("x", -vis.height / 2);
+				vis.legendGroup.attr("transform", `translate(${vis.width + 20}, 20)`);
+				
+				// Redraw visualization
+				vis.updateVis();
+			}
+		}, 250);
 	}
 
 	/*
@@ -247,6 +328,7 @@ class BarGraph {
 				.attr("y", 10)
 				.text(gender.name)
 				.style("font-size", "12px")
+				.style("pointer-events", "none")
 				.attr("alignment-baseline", "middle");
 		});
 	}
