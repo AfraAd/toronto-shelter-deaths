@@ -170,6 +170,8 @@ function calculateStatistics(data) {
 // BRUSH CHART FOR YEAR RANGE SELECTION
 // =====================================================
 
+let brushResizeTimer;
+
 function buildBrushChart(clean_data) {
   // Prepare data for brush chart (yearly totals)
   const yearGroups = d3.group(clean_data, d => d.variable);
@@ -193,31 +195,38 @@ function buildBrushChart(clean_data) {
       containerWidth = rect.width;
     } else {
       // If container width is 0 (hidden), try parent or use window width
-      const parent = container.closest('.tab-content');
+      const parent = container.closest('.global-filters');
       if (parent) {
         const parentRect = parent.getBoundingClientRect();
         if (parentRect.width > 0) {
-          containerWidth = parentRect.width;
+          containerWidth = parentRect.width * 0.6; // Approximate brush chart width
         } else {
           // Use a percentage of window width as fallback
-          containerWidth = Math.min(1200, window.innerWidth * 0.85);
+          containerWidth = Math.min(1200, window.innerWidth * 0.5);
         }
       } else {
-        containerWidth = Math.min(1200, window.innerWidth * 0.85);
+        containerWidth = Math.min(1200, window.innerWidth * 0.5);
       }
     }
   }
   const width = Math.max(300, containerWidth - margin.left - margin.right);
   const height = 80;
   
+  // Store width globally for resize handler
+  window.brushChartWidth = width;
+  window.brushChartMargin = margin;
+  
   // Clear any existing SVG
   d3.select("#brushChart").selectAll("*").remove();
   
-  // Create SVG for brush chart
+  // Create SVG for brush chart with responsive viewBox
   const svg = d3.select("#brushChart")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", "100%")
+    .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .style("max-width", "100%")
+    .style("height", "auto")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
   
@@ -247,10 +256,10 @@ function buildBrushChart(clean_data) {
     .attr("stroke-width", 1.5)
     .attr("d", area);
   
-  // X axis
+  // X axis - adjust tick count based on width
   svg.append("g")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(10))
+    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(Math.min(10, Math.floor(width / 60))))
     .style("font-size", "10px");
   
   // Y axis
@@ -288,11 +297,69 @@ function buildBrushChart(clean_data) {
       updateAllVisualizations();
     });
   
-  svg.append("g")
+  const brushGroup = svg.append("g")
     .attr("id", "brushGroup")
     .attr("class", "brush")
     .call(window.brush);
+  
+  // Make brush stroke adaptive to width
+  const strokeWidth = width < 400 ? 1 : width < 600 ? 1.5 : 2;
+  const handleWidth = width < 400 ? 6 : width < 600 ? 8 : 10;
+  
+  brushGroup.selectAll(".selection")
+    .style("stroke-width", strokeWidth);
+  
+  brushGroup.selectAll(".handle")
+    .style("width", handleWidth);
+  
+  // Store data globally for resize
+  window.brushChartData = brushData;
 }
+
+// Add window resize listener for brush chart
+window.addEventListener('resize', () => {
+  clearTimeout(brushResizeTimer);
+  brushResizeTimer = setTimeout(() => {
+    if (window.brushChartData && globalData.length > 0) {
+      // Save current selection before rebuild
+      const currentRange = [...globalFilters.yearRange];
+      const hasCustomSelection = currentRange[0] !== 2007 || currentRange[1] !== 2024;
+      
+      // Rebuild chart (this will recalculate and store new width)
+      buildBrushChart(globalData);
+      
+      // Restore selection if it wasn't the default
+      if (hasCustomSelection && window.brush && window.brushChartWidth) {
+        // Small delay to ensure chart is fully rendered
+        setTimeout(() => {
+          const brushGroup = d3.select("#brushGroup");
+          
+          if (!brushGroup.empty()) {
+            // Use the stored chart width from buildBrushChart
+            const chartWidth = window.brushChartWidth;
+            
+            // Create xScale matching buildBrushChart's scale
+            const xScale = d3.scaleLinear()
+              .domain([2007, 2024])
+              .range([0, chartWidth]);
+            
+            // Calculate brush selection coordinates
+            const selection = [
+              xScale(currentRange[0]),
+              xScale(currentRange[1])
+            ];
+            
+            // Apply the brush selection
+            brushGroup.call(window.brush.move, selection);
+            
+            // Ensure display text is correct
+            d3.select("#yearRangeDisplay").text(`${currentRange[0]} — ${currentRange[1]}`);
+          }
+        }, 150);
+      }
+    }
+  }, 200);
+});
 
 // =====================================================
 // TAB FUNCTIONALITY

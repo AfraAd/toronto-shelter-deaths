@@ -289,14 +289,41 @@ body {
     fill-opacity: 0.25;
     stroke: #134fbdff;
     stroke-width: 2px;
+    transition: stroke-width 0.2s ease;
 }
 
 .brush .handle {
     fill: #134fbdff;
+    transition: width 0.2s ease;
 }
 
 .brush-area {
     pointer-events: none;
+}
+
+/* Responsive brush styles */
+@media (max-width: 600px) {
+    .brush .selection {
+        stroke-width: 1.5px;
+        fill-opacity: 0.3;
+    }
+    
+    .brush .handle {
+        rx: 2;
+        ry: 2;
+    }
+}
+
+@media (max-width: 400px) {
+    .brush .selection {
+        stroke-width: 1px;
+        fill-opacity: 0.35;
+    }
+    
+    .brush .handle {
+        rx: 1;
+        ry: 1;
+    }
 }
 
 /* =====================================================
