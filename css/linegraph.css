@@ -56,7 +56,7 @@
 
 #lineChart .dot {
     fill: white;
-    stroke-width: 2.5px;
+    stroke-width: 0.0px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -132,7 +132,7 @@
 }
 
 #lineChart .legend circle {
-    stroke-width: 2px;
+    stroke-width: 0px;
 }
 
 #lineChart .legend g {
