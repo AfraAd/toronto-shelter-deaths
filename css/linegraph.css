@@ -21,15 +21,15 @@
 
 #lineChart .line-path {
     fill: none;
-    stroke-width: 3px;
+    stroke-width: 1.25px;
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: all 0.3s ease;
 }
 
 #lineChart .line-path:hover {
-    stroke-width: 4px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    stroke-width: 2px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 /* Individual gender line styles */
@@ -47,7 +47,7 @@
 
 #lineChart .line-path-Total {
     stroke: #2d5d2f;
-    stroke-width: 3.5px;
+    stroke-width: 1.5px;
 }
 
 /* =====================================================
@@ -55,8 +55,7 @@
    ===================================================== */
 
 #lineChart .dot {
-    fill: white;
-    stroke-width: 0.0px;
+    stroke-width: 0px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -252,10 +251,6 @@
     #lineChart {
         min-height: 500px;
     }
-    
-    #lineChart .legend {
-        transform: translate(calc(100% - 20px), 20px);
-    }
 }
 
 @media (max-width: 1024px) {
@@ -264,11 +259,7 @@
     }
     
     #lineChart .line-path {
-        stroke-width: 2.5px;
-    }
-    
-    #lineChart .dot {
-        r: 2.5px;
+        stroke-width: 2px;
     }
     
     #lineChart .legend text {
@@ -287,16 +278,7 @@
     }
     
     #lineChart .line-path {
-        stroke-width: 2px;
-    }
-    
-    #lineChart .dot {
-        r: 2px;
         stroke-width: 1.5px;
-    }
-    
-    #lineChart .legend {
-        transform: translate(10px, calc(100% + 30px));
     }
     
     #lineChart .legend g {

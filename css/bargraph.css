@@ -276,10 +276,6 @@
     #barChart {
         min-height: 550px;
     }
-    
-    #barChart .legend {
-        transform: translate(calc(100% - 20px), 20px);
-    }
 }
 
 @media (max-width: 1024px) {
@@ -321,10 +317,6 @@
     
     #barChart .bar-layer rect {
         stroke-width: 1px;
-    }
-    
-    #barChart .legend {
-        transform: translate(10px, calc(100% + 20px));
     }
     
     #barChart .value-label {
